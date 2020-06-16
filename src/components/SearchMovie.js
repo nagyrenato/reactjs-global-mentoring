@@ -30,7 +30,7 @@ class SearchMovie extends React.Component {
             <Form.Row>
               <Col xs={7}>
                 <Form.Control
-                  className="text-muted bg-transparent"
+                  className="text-danger bg-transparent"
                   placeholder="What do you want to watch"
                   value={this.state.value}
                   onChange={this.handleChange}
@@ -38,7 +38,7 @@ class SearchMovie extends React.Component {
               </Col>
               <Col>
                 <Button
-                  className="btn-danger"
+                  className="btn-danger text-uppercase"
                   variant="primary"
                   type="submit"
                   onSubmit={this.handleSubmit}

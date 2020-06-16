@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+/* Custom */
+
+.App-background {
+  background-image: url(../src/images/react-wallpaper.png);
+}
+
+.AddMovie-color .text-danger {
+  color: #000000;
+}
