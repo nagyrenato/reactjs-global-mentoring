@@ -3,6 +3,7 @@ import "../App.css";
 import AddMovie from "../components/AddMovie";
 import SearchMovie from "../components/SearchMovie";
 import ResultCount from "../components/ResultCount";
+import MovieResultGroup from "../components/MovieResultGroup";
 import MockData from "../mock/mock-data";
 
 function HomePage() {
@@ -15,6 +16,9 @@ function HomePage() {
       <br />
       <br />
       <ResultCount count={MockData.length} />
+      <br />
+      <br />
+      <MovieResultGroup movies={MockData} />
     </>
   );
 }

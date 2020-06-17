@@ -6,8 +6,8 @@ class AddMovie extends React.Component {
     return (
       <>
         <Button className="text-uppercase bg-transparent text-danger">
-          <i class="fa fa-plus" aria-hidden="true"></i>
-          <span class="ml-1"></span>
+          <i className="fa fa-plus" aria-hidden="true"></i>
+          <span className="ml-1"></span>
           Add movie
         </Button>
       </>
