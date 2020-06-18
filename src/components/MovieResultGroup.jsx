@@ -8,7 +8,11 @@ import Moment from "react-moment";
 
 function MovieResultGroup({ movies }) {
   const movieItems = movies.map((movie) => (
-    <ListGroup.Item key={movie.id} eventKey={movie.id}>
+    <ListGroup.Item
+      key={movie.id}
+      eventKey={movie.id}
+      className="bg-transparent text-white"
+    >
       <Container>
         <Row>
           <Col>
