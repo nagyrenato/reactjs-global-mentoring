@@ -16,7 +16,13 @@ function MovieResultGroup({ movies }) {
       <Container>
         <Row>
           <Col>
-            <Image src={movie.poster_path} />
+            <Image
+              src={movie.poster_path}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://via.placeholder.com/500x750.png";
+              }}
+            />
           </Col>
         </Row>
         <Row>
