@@ -11,7 +11,7 @@ function MovieResultGroup({ movies }) {
     <ListGroup.Item
       key={movie.id}
       eventKey={movie.id}
-      className="bg-transparent text-white"
+      className="bg-secondary text-white"
     >
       <Container>
         <Row>

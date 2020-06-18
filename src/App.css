@@ -42,3 +42,8 @@
 .App-background {
   background-image: url(../src/images/react-wallpaper.png);
 }
+
+.list-group {
+  display: inline-block;
+  width: min-content;
+}
