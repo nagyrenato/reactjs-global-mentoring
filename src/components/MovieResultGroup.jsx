@@ -12,6 +12,7 @@ function MovieResultGroup({ movies }) {
         <Row>
           <Col>
             <Image
+              fluid={true}
               src={movie.poster_path}
               onError={(e) => {
                 e.target.onerror = null;
@@ -43,7 +44,30 @@ function MovieResultGroup({ movies }) {
     </>
   ));
 
-  return <div>{movieItems}</div>;
+  function createRows() {
+    let rows = [];
+    for (let i = 0; i < movieItems.length; i++) {
+      rows.push(
+        <Row>
+          <Col>{movieItems[i]}</Col>
+          <Col>{movieItems[i + 1]}</Col>
+          <Col>{movieItems[i + 2]}</Col>
+        </Row>
+      );
+      i = i + 3;
+    }
+    return rows;
+  }
+
+  return (
+    <Container>
+      <>
+        {createRows().map((movieRow) => {
+          return movieRow;
+        })}
+      </>
+    </Container>
+  );
 }
 
 export default MovieResultGroup;
