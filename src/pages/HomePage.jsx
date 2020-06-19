@@ -4,20 +4,34 @@ import SearchMovie from "../components/SearchMovie";
 import ResultCount from "../components/ResultCount";
 import MovieResultGroup from "../components/MovieResultGroup";
 import MockData from "../mock/mock-data";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 
 function HomePage() {
   return (
     <>
-      <AddMovie />
-      <br />
-      <br />
-      <SearchMovie />
-      <br />
-      <br />
-      <ResultCount count={MockData.length} />
-      <br />
-      <br />
-      <MovieResultGroup movies={MockData} />
+      <Container>
+        <Row>
+          <Col className={"text-uppercase text-white"}>
+            <h1>Find your movie</h1>
+          </Col>
+          <Col>
+            <AddMovie />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <SearchMovie />
+          </Col>
+        </Row>
+        <Row>
+          <ResultCount count={MockData.length} />
+        </Row>
+        <Row>
+          <MovieResultGroup movies={MockData} />
+        </Row>
+      </Container>
     </>
   );
 }

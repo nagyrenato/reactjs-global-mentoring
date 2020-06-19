@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function ResultCount({ count }) {
   return (
@@ -8,5 +9,9 @@ function ResultCount({ count }) {
     </p>
   );
 }
+
+ResultCount.propTypes = {
+  name: PropTypes.number,
+};
 
 export default ResultCount;
