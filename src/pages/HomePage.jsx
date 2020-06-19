@@ -1,5 +1,4 @@
 import React from "react";
-import "../App.css";
 import AddMovie from "../components/AddMovie";
 import SearchMovie from "../components/SearchMovie";
 import ResultCount from "../components/ResultCount";

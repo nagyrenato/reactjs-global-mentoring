@@ -1,5 +1,4 @@
 import React from "react";
-import ListGroup from "react-bootstrap/ListGroup";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -8,51 +7,41 @@ import Moment from "react-moment";
 
 function MovieResultGroup({ movies }) {
   const movieItems = movies.map((movie) => (
-    <ListGroup.Item
-      key={movie.id}
-      eventKey={movie.id}
-      className="bg-secondary text-white"
-    >
-      <Container>
-        <Row>
-          <Col>
-            <Image
-              src={movie.poster_path}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src =
-                  "https://via.placeholder.com/500x750.png&text=No+Picture";
-              }}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>{movie.title}</Col>
-          <Col>
-            <label>
-              <Moment date={movie.release_date} format={"YYYY"}></Moment>
-            </label>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            {" "}
-            {movie.genres
-              .map((genre) => {
-                return `${genre}`;
-              })
-              .reduce((prev, curr) => [prev, ", ", curr])}
-          </Col>
-        </Row>
-      </Container>
-    </ListGroup.Item>
+    <Container key={movie.id} className="bg-secondary text-white container-sm">
+      <Row>
+        <Col>
+          <Image
+            src={movie.poster_path}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src =
+                "https://via.placeholder.com/500x750.png&text=No+Picture";
+            }}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>{movie.title}</Col>
+        <Col>
+          <label>
+            <Moment date={movie.release_date} format={"YYYY"}></Moment>
+          </label>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          {" "}
+          {movie.genres
+            .map((genre) => {
+              return `${genre}`;
+            })
+            .reduce((prev, curr) => [prev, ", ", curr])}
+        </Col>
+      </Row>
+    </Container>
   ));
 
-  return (
-    <>
-      <ListGroup>{movieItems}</ListGroup>
-    </>
-  );
+  return <div>{movieItems}</div>;
 }
 
 export default MovieResultGroup;

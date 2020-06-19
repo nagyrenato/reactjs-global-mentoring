@@ -1,12 +1,15 @@
 import React from "react";
 import "./App.css";
 import HomePage from "./pages/HomePage";
+import ErrorBoundary from "./components/Errorboundary";
 
 function App() {
   return (
     <>
       <div className="App-background">
-        <HomePage />
+        <ErrorBoundary>
+          <HomePage />
+        </ErrorBoundary>
       </div>
     </>
   );
