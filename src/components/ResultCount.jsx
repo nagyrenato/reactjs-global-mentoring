@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 function ResultCount({ count }) {
   return (
-    <p className="text-white">
+    <div className="text-white">
       {" "}
       {count} <b>{count <= 1 ? "movie" : "movies"}</b> found{" "}
-    </p>
+    </div>
   );
 }
 

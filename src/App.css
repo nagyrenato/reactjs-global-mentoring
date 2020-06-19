@@ -40,5 +40,9 @@
 /* Custom */
 
 .App-background {
+  background-color: #555555
+}
+
+.Header-background {
   background-image: url(../src/images/react-wallpaper.png);
 }

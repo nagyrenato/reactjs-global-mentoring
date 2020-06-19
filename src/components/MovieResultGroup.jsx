@@ -2,17 +2,23 @@ import React from "react";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import Moment from "react-moment";
 import Container from "react-bootstrap/Container";
 
 function MovieResultGroup({ movies }) {
   const movieItems = movies.map((movie) => (
     <>
-      <Container key={movie.id} className="bg-dark text-white container-sm">
+      <Container
+        fluid
+        key={movie.id}
+        className="bg-dark text-white container-sm"
+      >
         <Row>
           <Col>
+            <Button>Test</Button>
             <Image
-              fluid={true}
+              fluid
               src={movie.poster_path}
               onError={(e) => {
                 e.target.onerror = null;
@@ -48,7 +54,7 @@ function MovieResultGroup({ movies }) {
     let rows = [];
     for (let i = 0; i < movieItems.length; i++) {
       rows.push(
-        <Row>
+        <Row key={"row" + i}>
           <Col>{movieItems[i]}</Col>
           <Col>{movieItems[i + 1]}</Col>
           <Col>{movieItems[i + 2]}</Col>
@@ -59,14 +65,26 @@ function MovieResultGroup({ movies }) {
     return rows;
   }
 
+  function RenderIfNotEmpty() {
+    return (
+      <Container className={"bg-dark"}>
+        <>
+          {createRows().map((movieRow) => {
+            return movieRow;
+          })}
+        </>
+      </Container>
+    );
+  }
+
   return (
-    <Container>
-      <>
-        {createRows().map((movieRow) => {
-          return movieRow;
-        })}
-      </>
-    </Container>
+    <>
+      {movieItems.length === 0 ? (
+        <h1>No Movies Found</h1>
+      ) : (
+        <RenderIfNotEmpty></RenderIfNotEmpty>
+      )}
+    </>
   );
 }
 

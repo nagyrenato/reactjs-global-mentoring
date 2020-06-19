@@ -28,7 +28,7 @@ class SearchMovie extends React.Component {
         <Form>
           <Form.Group controlId="searcForm">
             <Form.Row>
-              <Col xs={7}>
+              <Col className={"col-10"}>
                 <Form.Control
                   className="text-danger bg-transparent"
                   placeholder="What do you want to watch"
