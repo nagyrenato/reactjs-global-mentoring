@@ -11,7 +11,7 @@ function ResultCount({ count }) {
 }
 
 ResultCount.propTypes = {
-  name: PropTypes.number,
+  count: PropTypes.number,
 };
 
 export default ResultCount;
