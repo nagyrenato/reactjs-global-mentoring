@@ -25,7 +25,7 @@ class HomePage extends React.Component {
       .then((result) => {
         const moviesResult = result;
         this.setState({
-          movies: moviesResult,
+          movies: moviesResult, // // movies: [] for testing the empty result component
         });
       });
   }

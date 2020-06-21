@@ -40,9 +40,13 @@
 /* Custom */
 
 .App-background {
-  background-color: #555555
+  background-color: #555555;
 }
 
 .Header-background {
   background-image: url(../src/images/react-wallpaper.png);
+}
+
+.EmptyMovieList-height {
+  height: 50em;
 }

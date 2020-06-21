@@ -16,7 +16,7 @@ function MovieResultGroup({ movies }) {
       >
         <Row>
           <Col>
-            <Button>Test</Button>
+            <Button>[3 dot menu]</Button>
             <Image
               fluid
               src={movie.poster_path}
@@ -65,7 +65,19 @@ function MovieResultGroup({ movies }) {
     return rows;
   }
 
-  function RenderIfNotEmpty() {
+  function EmptyMovieList() {
+    return (
+      <Container
+        className={
+          "bg-dark text-capitalize EmptyMovieList-height d-flex align-items-center justify-content-center"
+        }
+      >
+        <h1 className={"bg-dark text-white"}>No movie found</h1>
+      </Container>
+    );
+  }
+
+  function MovieList() {
     return (
       <Container className={"bg-dark"}>
         <>
@@ -80,9 +92,9 @@ function MovieResultGroup({ movies }) {
   return (
     <>
       {movieItems.length === 0 ? (
-        <h1>No Movies Found</h1>
+        <EmptyMovieList></EmptyMovieList>
       ) : (
-        <RenderIfNotEmpty></RenderIfNotEmpty>
+        <MovieList></MovieList>
       )}
     </>
   );
