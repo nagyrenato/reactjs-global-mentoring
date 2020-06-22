@@ -16,7 +16,11 @@ function MovieResultGroup({ movies }) {
       >
         <Row>
           <Col>
-            <Button>[3 dot menu]</Button>
+            <Button
+              className={"btn btn-circle-v2 btn-circle-rounded btn-secondary"}
+            >
+              <i class="fa fa-ellipsis-v"></i>
+            </Button>
             <Image
               fluid
               src={movie.poster_path}
@@ -29,11 +33,13 @@ function MovieResultGroup({ movies }) {
           </Col>
         </Row>
         <Row>
-          <Col>{movie.title}</Col>
-          <Col>
-            <label>
+          <Col className={"col-sm-9"}>
+            <h5>{movie.title}</h5>
+          </Col>
+          <Col className={"col-sm-3"}>
+            <p className={"border-info"}>
               <Moment date={movie.release_date} format={"YYYY"}></Moment>
-            </label>
+            </p>
           </Col>
         </Row>
         <Row>
