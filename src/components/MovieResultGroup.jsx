@@ -9,14 +9,13 @@ import Container from "react-bootstrap/Container";
 function MovieResultGroup({ movies }) {
   const movieItems = movies.map((movie) => (
     <>
-      <div
-        key={movie.id}
-        className="text-white"
-      >
+      <div key={movie.id} className="text-white">
         <Row>
           <Col>
             <Button
-              className={"btn btn-circle-v2 btn-circle-rounded btn-secondary"}
+              className={
+                "btn btn-circle-v2 btn-circle-rounded btn-secondary btn-3dot"
+              }
             >
               <i class="fa fa-ellipsis-v"></i>
             </Button>
@@ -84,11 +83,11 @@ function MovieResultGroup({ movies }) {
 
   function MovieList() {
     return (
-        <>
-          {createRows().map((movieRow) => {
-            return movieRow;
-          })}
-        </>
+      <>
+        {createRows().map((movieRow) => {
+          return movieRow;
+        })}
+      </>
     );
   }
 

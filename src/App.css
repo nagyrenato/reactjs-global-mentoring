@@ -43,33 +43,6 @@
   background-color: #555555;
 }
 
-.Header-background {
-  background-image: url(../src/images/react-wallpaper.png);
-}
-
 .EmptyMovieList-height {
   height: 50em;
-}
-
-/* Style the button and place it in the middle of the container/image */
-.btn {
-  position: absolute;
-  top: 7.5%;
-  left: 85%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: #555;
-  color: white;
-  font-size: 16px;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.btn-circle-rounded {
-  background-color: grey;
-  height: 50px;
-  width: 50px;
-  border-radius: 50% !important;
 }
