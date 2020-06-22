@@ -62,12 +62,19 @@ body, html {
     color: #ffffff;
 }
 
-.search-box .input-group .btn, .search-box .input-group .btn:active:focus {
+.search-box .input-group .btn, .search-box .input-group .btn:active:focus,
+.modal-footer .btn {
     text-transform: uppercase;
     background-color: #f65261;
     border: none;
     padding: 8px 50px;
     opacity: 0.9;
+}
+
+.modal-footer .btn.outline {
+    border: 1px solid #f65261;
+    background: none;
+    color: #f65261;
 }
 
 .movie-list-background {
@@ -78,4 +85,87 @@ body, html {
 .footer {
     height: 75px;
     background-color: #424242;
+}
+
+.modal-open .container {
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #232323;
+}
+
+.modal-header, .modal-footer {
+    border: none;
+}
+
+.modal-header .close {
+    color: #ffffff;
+
+    font-size: xxx-large;
+    opacity: 1;
+    font-weight: normal;
+    text-shadow: none;
+}
+
+.modal-header .close:hover {
+    cursor: pointer;
+}
+
+.modal-title {
+    text-transform: uppercase;
+    font-weight: lighter;
+}
+
+.modal-content .form-group {
+    margin-bottom: 1.5rem;
+    line-height: normal;
+}
+
+.modal-content .form-group .form-label {
+    color: #f65261;
+    text-transform: uppercase;
+}
+
+.modal-content input.form-control,
+.modal-content input.form-control:focus {
+    background-color: rgba(66, 66, 66, 0.5);
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    padding: 25px 20px;
+    color: #ffffff;
+}
+
+.modal-content .select-genre__control {
+    background-color: rgba(66, 66, 66, 0.5);
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    padding: 7px;
+    box-shadow: none !important;
+}
+
+.modal-content .select-genre__indicators .select-genre__indicator-separator {
+    background-color: #f65261;
+}
+
+.modal-content .select-genre__multi-value__remove {
+    color: #424242;
+}
+
+.modal-content .select-genre__indicators .select-genre__clear-indicator,
+.modal-content .select-genre__indicators .select-genre__dropdown-indicator {
+    color: #f65261;
+}
+
+.modal-content input:focus {
+    border: 1px solid #f65261;
+    transition: none;
+    box-shadow: none;
+}
+
+.modal-content .movie-id {
+    font-size: larger;
 }

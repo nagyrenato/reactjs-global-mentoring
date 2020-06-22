@@ -5,15 +5,11 @@ import HomePage from "./pages/HomePage";
 import ErrorBoundary from "./components/Errorboundary";
 
 function App() {
-  return (
-    <>
-      <div className="App-background">
+    return (
         <ErrorBoundary>
-          <HomePage />
+            <HomePage/>
         </ErrorBoundary>
-      </div>
-    </>
-  );
+    );
 }
 
 export default App;

@@ -4,7 +4,6 @@ import MovieResultGroup from "../components/MovieResultGroup";
 import Container from "react-bootstrap/Container";
 import SearchBar from "../components/SearchBar";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Footer from "../components/Footer";
 
 class HomePage extends React.Component {
