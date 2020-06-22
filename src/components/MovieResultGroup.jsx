@@ -17,7 +17,7 @@ function MovieResultGroup({ movies }) {
                 "btn btn-circle-v2 btn-circle-rounded btn-secondary btn-3dot"
               }
             >
-              <i class="fa fa-ellipsis-v"></i>
+              <i className="fa fa-ellipsis-v"></i>
             </Button>
             <Image
               fluid
