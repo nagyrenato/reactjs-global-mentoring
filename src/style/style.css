@@ -5,6 +5,26 @@ body, html {
     margin: 25px 0;
 }
 
+.opacity-0 {
+    opacity: 0 !important;
+}
+
+.opacity-1 {
+    opacity: 0.2 !important;
+}
+
+.opacity-2 {
+    opacity: 0.4 !important;
+}
+
+.opacity-3 {
+    opacity: 0.6 !important;
+}
+
+.opacity-4 {
+    opacity: 0.8 !important;
+}
+
 .search-box {
     width: 100%;
     height: 400px;
@@ -168,4 +188,59 @@ body, html {
 
 .modal-content .movie-id {
     font-size: larger;
+}
+
+.movie-item:hover img {
+    cursor: pointer;
+}
+
+.movie-item .dropdown {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    display: none;
+}
+
+.movie-item:hover .dropdown {
+    display: block;
+}
+
+.movie-item .dropdown .btn,
+.movie-item .dropdown .btn:active {
+    border-radius: 30px;
+    box-shadow: none !important;
+    background-color: #424242;
+    border-color: #333333;
+}
+
+.movie-item .dropdown .dropdown-menu {
+    background-color: #555555;
+}
+
+.movie-item .dropdown .dropdown-item {
+    color: #ffffff;
+}
+
+.movie-item .dropdown .dropdown-item:hover {
+    background-color: #f65261;
+}
+
+.movie-item .movie-title {
+    font-size: larger;
+}
+
+.movie-item .movie-date {
+    color: #e0e0e0;
+    text-align: right;
+    font-size: small;
+}
+
+.movie-item .movie-date time {
+    border: 1px solid #f65261;
+    border-radius: 3px;
+    padding: 3px 15px;
+}
+
+.movie-item .movie-genres {
+    font-size: smaller;
 }
