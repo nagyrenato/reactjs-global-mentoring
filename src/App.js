@@ -1,5 +1,6 @@
 import React from "react";
-import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./style/style.css";
 import HomePage from "./pages/HomePage";
 import ErrorBoundary from "./components/Errorboundary";
 

@@ -9,10 +9,9 @@ import Container from "react-bootstrap/Container";
 function MovieResultGroup({ movies }) {
   const movieItems = movies.map((movie) => (
     <>
-      <Container
-        fluid
+      <div
         key={movie.id}
-        className="bg-dark text-white container-sm"
+        className="text-white"
       >
         <Row>
           <Col>
@@ -52,7 +51,7 @@ function MovieResultGroup({ movies }) {
               .reduce((prev, curr) => [prev, ", ", curr])}
           </Col>
         </Row>
-      </Container>
+      </div>
     </>
   ));
 
@@ -85,13 +84,11 @@ function MovieResultGroup({ movies }) {
 
   function MovieList() {
     return (
-      <Container className={"bg-dark"}>
         <>
           {createRows().map((movieRow) => {
             return movieRow;
           })}
         </>
-      </Container>
     );
   }
 

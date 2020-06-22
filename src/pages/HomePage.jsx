@@ -1,76 +1,52 @@
 import React from "react";
-import AddMovie from "../components/AddMovie";
-import SearchMovie from "../components/SearchMovie";
 import ResultCount from "../components/ResultCount";
 import MovieResultGroup from "../components/MovieResultGroup";
+import Container from "react-bootstrap/Container";
+import SearchBar from "../components/SearchBar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import Footer from "../components/Footer";
 
 class HomePage extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      movies: [],
-      formDisplay: false,
-      sortBy: "releaseDate",
-      queryText: "",
-      lastIndex: 0,
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            movies: [],
+            formDisplay: false,
+            sortBy: "releaseDate",
+            queryText: "",
+            lastIndex: 0,
+        };
+    }
 
-  componentDidMount() {
-    fetch("./mock-data.json")
-      .then((response) => response.json())
-      .then((result) => {
-        const moviesResult = result;
-        this.setState({
-          movies: moviesResult, // // movies: [] for testing the empty result component
-        });
-      });
-  }
+    componentDidMount() {
+        fetch("./mock-data.json")
+            .then((response) => response.json())
+            .then((result) => {
+                const moviesResult = result;
+                this.setState({
+                    movies: moviesResult, // // movies: [] for testing the empty result component
+                });
+            });
+    }
 
-  render() {
-    return (
-      <>
-        <Container>
-          <Row>
-            <Container className="Header-background">
-              <Row>
-                <Col className={"d-flex justify-content-end"}>
-                  <AddMovie />
-                </Col>
-              </Row>
-              <Row>
-                <Col className={"col-1"}></Col>
-                <Col className={"text-uppercase text-white col-10"}>
-                  <h1>Find your movie</h1>
-                </Col>
-                <Col className={"col-1"}></Col>
-              </Row>
-              <Row>
-                <Col className={"col-1"}></Col>
-                <Col className={"col-10"}>
-                  <SearchMovie />
-                </Col>
-                <Col className={"col-1"}></Col>
-              </Row>
+    render() {
+        return (
+            <Container>
+                <Row>
+                    <SearchBar/>
+                </Row>
+                <Row className={"movie-list-background d-grid px-5 py-3"}>
+                    <div>All Documentary Comedy Horror ...</div> {/* TODO fix this*/}
+                    <ResultCount count={this.state.movies.length}/>
+                    <MovieResultGroup movies={this.state.movies}/>
+                </Row>
+                <Row>
+                    <Footer />
+                </Row>
             </Container>
-          </Row>
-          <Row>
-            <Container className="bg-dark">
-              <Row>
-                <ResultCount count={this.state.movies.length} />
-              </Row>
-              <Row>
-                <MovieResultGroup movies={this.state.movies} />
-              </Row>
-            </Container>
-          </Row>
-        </Container>
-      </>
-    );
-  }
+        );
+    }
 }
 
 export default HomePage;
