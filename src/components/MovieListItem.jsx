@@ -7,13 +7,16 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 import Image from "react-bootstrap/Image";
 import Moment from "react-moment";
 
-const MovieListItem = ({movie}) => {
+const MovieListItem = ({movie, onEdit, setMovie}) => {
     return (
         <Container className={"px-0 mb-5 movie-item"}>
             <Row className={"mb-3"}>
                 <Col>
                     <DropdownButton id={"movie-menu-" + movie.id} title={""} alignRight>
-                        <DropdownItem>Edit</DropdownItem>
+                        <DropdownItem onClick={() => {
+                            onEdit();
+                            setMovie(movie);
+                        }}>Edit</DropdownItem>
                         <DropdownItem>Delete</DropdownItem>
                     </DropdownButton>
                     <Image
