@@ -5,16 +5,10 @@ class GenreGroup extends React.Component {
   constructor(props) {
     super(props);
     this.select = this.select.bind(this);
-    this.state = {
-      value: "All",
-    };
   }
 
   select(event) {
-    console.log(event.target.innerText);
-    this.setState({
-      value: event.target.innerText,
-    });
+    this.props.changeGenre(event.target.innerText);
   }
 
   render() {

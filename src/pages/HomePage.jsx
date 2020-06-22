@@ -15,10 +15,25 @@ class HomePage extends React.Component {
     this.state = {
       movies: [],
       formDisplay: false,
-      sortBy: "releaseDate",
+      sortBy: "Release Date".toUpperCase(),
       queryText: "",
       lastIndex: 0,
+      genre: "All",
     };
+    this.changeGenre = this.changeGenre.bind(this);
+    this.changeSortBy = this.changeSortBy.bind(this);
+  }
+
+  changeGenre(value) {
+    this.setState({
+      genre: value,
+    });
+  }
+
+  changeSortBy(value) {
+    this.setState({
+      sortBy: value,
+    });
   }
 
   componentDidMount() {
@@ -40,11 +55,16 @@ class HomePage extends React.Component {
         </Row>
         <Row className={"movie-list-background d-grid px-5 py-3"}>
           <Row>
-            <Col>
-              <GenreGroup></GenreGroup>
+            <Col className={"col-sm-5"}>
+              <GenreGroup changeGenre={this.changeGenre}></GenreGroup>
             </Col>
-            <Col className={"float-md-right"}>
-              <SortBy></SortBy>
+            <Col className={"col-sm-4"}></Col>
+            <Col className={"col-sm-3"}>
+              <SortBy
+                defaultSortBy={this.state.sortBy}
+                changeSortBy={this.changeSortBy}
+                className={"align-content-end"}
+              ></SortBy>
             </Col>
           </Row>
           <Row>
