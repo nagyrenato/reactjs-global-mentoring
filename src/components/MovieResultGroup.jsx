@@ -8,8 +8,8 @@ function MovieResultGroup({ movies }) {
     <>
       <Row>
         {movies.map((movie, key) => (
-          <Col lg={4} md={6} sm={12}>
-            <MovieListItem key={key} movie={movie} />
+          <Col key={key} lg={4} md={6} sm={12}>
+            <MovieListItem key={movie.id} movie={movie} />
           </Col>
         ))}
       </Row>
