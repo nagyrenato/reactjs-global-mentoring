@@ -40,7 +40,10 @@ class SortBy extends React.Component {
               Release date
             </Dropdown.Item>
             <Dropdown.Item onClick={this.select} className={"text-uppercase"}>
-              Title
+              Rating
+            </Dropdown.Item>
+            <Dropdown.Item onClick={this.select} className={"text-uppercase"}>
+              Genre
             </Dropdown.Item>
           </DropdownButton>
         </div>

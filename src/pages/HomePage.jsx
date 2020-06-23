@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Footer from "../components/Footer";
 import SortBy from "../components/SortBy";
+import EmptyMovieResultGroup from "../components/EmptyMovieResultGroup";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -68,7 +69,13 @@ class HomePage extends React.Component {
           </Row>
           <Row>
             <ResultCount count={this.state.movies.length} />
-            <MovieResultGroup movies={this.state.movies} />
+            <>
+              {this.state.movies.length === 0 ? (
+                <EmptyMovieResultGroup />
+              ) : (
+                <MovieResultGroup movies={this.state.movies} />
+              )}
+            </>
           </Row>
         </Row>
         <Row>
