@@ -13,14 +13,7 @@ const MovieListItem = ({ movie, onEdit, setMovie }) => {
       <Row className={"mb-3"}>
         <Col>
           <DropdownButton id={"movie-menu-" + movie.id} title={""} alignRight>
-            <DropdownItem
-              onClick={() => {
-                onEdit();
-                setMovie(movie);
-              }}
-            >
-              Edit
-            </DropdownItem>
+            <DropdownItem>Edit</DropdownItem>
             <DropdownItem>Delete</DropdownItem>
           </DropdownButton>
           <Image
