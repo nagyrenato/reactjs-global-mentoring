@@ -1,7 +1,6 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import Row from "react-bootstrap/Row";
 
 class SortBy extends React.Component {
   constructor(props) {
@@ -29,13 +28,13 @@ class SortBy extends React.Component {
 
   render() {
     return (
-      <>
-        <Row>
-          <p className={"text-uppercase"}>Sort by</p>
+        <div className={"justify-content-center align-items-center d-flex"}>
+          <span className={"text-uppercase mr-3"}>Sort by</span>
           <DropdownButton
-            className={"bg-secondary"}
-            id="dropdown-item-button"
-            title={this.props.defaultSortBy}
+              variant={"none"}
+              className={"btn-sort-by"}
+              id="dropdown-item-button"
+              title={this.props.defaultSortBy}
           >
             <Dropdown.Item onClick={this.select} className={"text-uppercase"}>
               Release date
@@ -44,8 +43,7 @@ class SortBy extends React.Component {
               Title
             </Dropdown.Item>
           </DropdownButton>
-        </Row>
-      </>
+        </div>
     );
   }
 }

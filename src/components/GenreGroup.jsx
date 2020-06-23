@@ -13,17 +13,17 @@ class GenreGroup extends React.Component {
 
   render() {
     return (
-      <ListGroup horizontal className={"bg-transparent"}>
-        <ListGroup.Item
-          action
-          onClick={this.select}
-          className={"bg-transparent text-white"}
-        >
-          All
-        </ListGroup.Item>
-        <ListGroup.Item
-          action
-          onClick={this.select}
+      <ListGroup horizontal className={"genre-selector bg-transparent"}>
+          <ListGroup.Item
+              action
+              onClick={this.select}
+              className={"bg-transparent text-white"}
+          >
+              All
+          </ListGroup.Item>
+          <ListGroup.Item
+              action
+              onClick={this.select}
           className={"bg-transparent text-white"}
         >
           Documentary

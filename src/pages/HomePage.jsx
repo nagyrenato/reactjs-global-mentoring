@@ -51,20 +51,19 @@ class HomePage extends React.Component {
     return (
       <Container>
         <Row>
-          <SearchBar />
+          <SearchBar/>
         </Row>
         <Row className={"movie-list-background d-grid px-5 py-3"}>
-          <Row>
-            <Col className={"col-sm-5"}>
-              <GenreGroup changeGenre={this.changeGenre}></GenreGroup>
+          <Row className={"filter-bar"}>
+            <Col className={"col-sm-9"}>
+              <GenreGroup changeGenre={this.changeGenre}/>
             </Col>
-            <Col className={"col-sm-4"}></Col>
-            <Col className={"col-sm-3"}>
+            <Col className={"col-sm-3 justify-content-end align-items-center d-flex"}>
               <SortBy
-                defaultSortBy={this.state.sortBy}
-                changeSortBy={this.changeSortBy}
-                className={"align-content-end"}
-              ></SortBy>
+                  defaultSortBy={this.state.sortBy}
+                  changeSortBy={this.changeSortBy}
+                  className={"align-content-end"}
+              />
             </Col>
           </Row>
           <Row>
