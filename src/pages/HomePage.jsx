@@ -57,7 +57,7 @@ class HomePage extends React.Component {
         <Row className={"movie-list-background d-grid px-5 py-3"}>
           <Row className={"filter-bar"}>
             <Col className={"col-sm-9"}>
-              <GenreGroup changeGenre={this.changeGenre} />
+              <GenreGroup onSelect={this.changeGenre} />
             </Col>
             <Col
               className={
