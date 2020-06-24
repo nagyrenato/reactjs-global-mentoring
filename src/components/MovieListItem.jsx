@@ -7,7 +7,7 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 import Image from "react-bootstrap/Image";
 import Moment from "react-moment";
 
-const MovieListItem = ({ movie, onEdit, setMovie }) => {
+const MovieListItem = ({ movie, onEdit, onDelete, setMovie }) => {
   return (
     <Container className={"px-0 mb-5 movie-item"}>
       <Row className={"mb-3"}>
@@ -21,7 +21,13 @@ const MovieListItem = ({ movie, onEdit, setMovie }) => {
             >
               Edit
             </DropdownItem>
-            <DropdownItem>Delete</DropdownItem>
+            <DropdownItem
+              onClick={() => {
+                onDelete();
+              }}
+            >
+              Delete
+            </DropdownItem>
           </DropdownButton>
           <Image
             fluid

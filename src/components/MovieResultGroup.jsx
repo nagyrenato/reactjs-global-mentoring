@@ -3,30 +3,53 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import MovieListItem from "./MovieListItem";
 import MovieEditForm from "./MovieEditForm";
+import MovieDeleteForm from "./MovieDeleteForm";
 
 function MovieResultGroup({ movies }) {
-  const [show, setShow] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
   const [movie, setMovie] = useState({});
 
-  const hideModal = useCallback(() => setShow(false), [setShow]);
-  const showModal = useCallback(() => setShow(true), [setShow]);
+  const hideEditModal = useCallback(() => setShowEditForm(false), [
+    setShowEditForm,
+  ]);
+  const showEditModal = useCallback(() => setShowEditForm(true), [
+    setShowEditForm,
+  ]);
+
+  const hideDeleteModal = useCallback(() => setShowDeleteForm(false), [
+    setShowDeleteForm,
+  ]);
+  const showDeleteModal = useCallback(() => setShowDeleteForm(true), [
+    setShowDeleteForm,
+  ]);
 
   return (
     <>
       <Row>
         {movies.map((movie, key) => (
-          <Col lg={4} md={6} sm={12}>
+          <Col key={key} lg={4} md={6} sm={12}>
             <MovieListItem
-              key={key}
+              key={movie.id}
               movie={movie}
-              onEdit={showModal}
+              onEdit={showEditModal}
+              onDelete={showDeleteModal}
               setMovie={setMovie}
             />
           </Col>
         ))}
       </Row>
 
-      <MovieEditForm show={show} handleClose={hideModal} movie={movie} />
+      <MovieEditForm
+        show={showEditForm}
+        handleClose={hideEditModal}
+        movie={movie}
+      />
+      <MovieDeleteForm
+        show={showDeleteForm}
+        handleClose={hideDeleteModal}
+        movie={movie.id}
+      />
     </>
   );
 }
