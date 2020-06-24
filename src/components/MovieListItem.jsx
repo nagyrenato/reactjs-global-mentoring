@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,44 +7,53 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 import Image from "react-bootstrap/Image";
 import Moment from "react-moment";
 
-const MovieListItem = ({movie, onEdit, setMovie}) => {
-    return (
-        <Container className={"px-0 mb-5 movie-item"}>
-            <Row className={"mb-3"}>
-                <Col>
-                    <DropdownButton id={"movie-menu-" + movie.id} title={""} alignRight>
-                        <DropdownItem onClick={() => {
-                            onEdit();
-                            setMovie(movie);
-                        }}>Edit</DropdownItem>
-                        <DropdownItem>Delete</DropdownItem>
-                    </DropdownButton>
-                    <Image
-                        fluid
-                        src={movie.poster_path}
-                        onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src =
-                                "https://via.placeholder.com/500x750.png&text=No+Picture";
-                        }}
-                    />
-                </Col>
-            </Row>
-            <Row className={"mb-2 opacity-4"}>
-                <Col lg={9} md={9} sm={9} className={"movie-title"}>
-                    {movie.title}
-                </Col>
-                <Col lg={3} md={3} sm={3} className={"movie-date opacity-4 justify-content-center align-self-center"}>
-                    <Moment date={movie.release_date} format={"YYYY"}/>
-                </Col>
-            </Row>
-            <Row className={"mb-2 opacity-3"}>
-                <Col className={"movie-genres"}>
-                    {movie.genres.join(", ")}
-                </Col>
-            </Row>
-        </Container>
-    );
+const MovieListItem = ({ movie, onEdit, setMovie }) => {
+  return (
+    <Container className={"px-0 mb-5 movie-item"}>
+      <Row className={"mb-3"}>
+        <Col>
+          <DropdownButton id={"movie-menu-" + movie.id} title={""} alignRight>
+            <DropdownItem
+              onClick={() => {
+                onEdit();
+                setMovie(movie);
+              }}
+            >
+              Edit
+            </DropdownItem>
+            <DropdownItem>Delete</DropdownItem>
+          </DropdownButton>
+          <Image
+            fluid
+            src={movie.poster_path}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src =
+                "https://via.placeholder.com/500x750.png&text=No+Picture";
+            }}
+          />
+        </Col>
+      </Row>
+      <Row className={"mb-2 opacity-4"}>
+        <Col lg={9} md={9} sm={9} className={"movie-title"}>
+          {movie.title}
+        </Col>
+        <Col
+          lg={3}
+          md={3}
+          sm={3}
+          className={
+            "movie-date opacity-4 justify-content-center align-self-center"
+          }
+        >
+          <Moment date={movie.release_date} format={"YYYY"} />
+        </Col>
+      </Row>
+      <Row className={"mb-2 opacity-3"}>
+        <Col className={"movie-genres"}>{movie.genres.join(", ")}</Col>
+      </Row>
+    </Container>
+  );
 };
 
-export default MovieListItem
+export default MovieListItem;
