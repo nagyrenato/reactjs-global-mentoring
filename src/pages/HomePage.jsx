@@ -33,7 +33,7 @@ class HomePage extends React.Component {
 
   changeSortBy(value) {
     this.setState({
-      sortBy: value,
+      sortBy: value.currentTarget.textContent,
     });
   }
 
@@ -66,7 +66,7 @@ class HomePage extends React.Component {
             >
               <SortBy
                 defaultSortBy={this.state.sortBy}
-                changeSortBy={this.changeSortBy}
+                onChangeSortBy={this.changeSortBy}
                 className={"align-content-end"}
               />
             </Col>
