@@ -9,18 +9,28 @@ import Col from "react-bootstrap/Col";
 import Footer from "../components/Footer";
 import SortBy from "../components/SortBy";
 import EmptyMovieResultGroup from "../components/EmptyMovieResultGroup";
+import genreOptions from "../utils/genres";
+import sortByOptions from "../utils/sortByOptions";
+
+genreOptions.unshift({ value: "all", label: "All" });
+const genres = genreOptions;
 
 function HomePage() {
   const [movies, setMovies] = useState([]);
-  const [genre, setGenre] = useState("All");
-  const [sortBy, setSortBy] = useState("Release date");
+  const [genreIndex, setGenreIndex] = useState(0);
+  const [sortByIndex, setSortByIndex] = useState(0);
 
   function changeGenre(value) {
-    setGenre(value);
+    const selectedIndex = genres.findIndex((genre) => genre.label === value);
+    console.log(selectedIndex);
+    setGenreIndex(selectedIndex);
   }
 
   function changeSortBy(value) {
-    setSortBy(value);
+    const selectedIndex = sortByOptions.findIndex(
+      (sortByOption) => sortByOption.label === value
+    );
+    setSortByIndex(selectedIndex);
   }
 
   useEffect(() => {
@@ -41,7 +51,7 @@ function HomePage() {
         <Row className={"movie-list-background d-grid px-5 py-3"}>
           <Row className={"filter-bar"}>
             <Col className={"col-sm-9"}>
-              <GenreGroup onSelect={changeGenre} />
+              <GenreGroup genres={genres} onSelect={changeGenre} />
             </Col>
             <Col
               className={
@@ -49,7 +59,8 @@ function HomePage() {
               }
             >
               <SortBy
-                defaultSortBy={sortBy}
+                sortByOptions={sortByOptions}
+                indexOfSelectedOption={sortByIndex}
                 onChangeSortBy={changeSortBy}
                 className={"align-content-end"}
               />
