@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ResultCount from "../components/ResultCount";
 import MovieResultGroup from "../components/MovieResultGroup";
 import Container from "react-bootstrap/Container";
@@ -10,46 +10,30 @@ import Footer from "../components/Footer";
 import SortBy from "../components/SortBy";
 import EmptyMovieResultGroup from "../components/EmptyMovieResultGroup";
 
-class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      movies: [],
-      formDisplay: false,
-      sortBy: "Release Date".toUpperCase(),
-      queryText: "",
-      lastIndex: 0,
-      genre: "All",
-    };
-    this.changeGenre = this.changeGenre.bind(this);
-    this.changeSortBy = this.changeSortBy.bind(this);
+function HomePage() {
+  const [movies, setMovies] = useState([]);
+  const [genre, setGenre] = useState("All");
+  const [sortBy, setSortBy] = useState("Release date");
+
+  function changeGenre(value) {
+    setGenre(value);
   }
 
-  changeGenre(value) {
-    this.setState({
-      genre: value,
-    });
+  function changeSortBy(value) {
+    setSortBy(value);
   }
 
-  changeSortBy(value) {
-    this.setState({
-      sortBy: value.currentTarget.textContent,
-    });
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     fetch("./mock-data.json")
       .then((response) => response.json())
       .then((result) => {
         const moviesResult = result;
-        this.setState({
-          movies: moviesResult, // // movies: [] for testing the empty result component
-        });
+        setMovies(moviesResult);
       });
-  }
+  });
 
-  render() {
-    return (
+  return (
+    <>
       <Container>
         <Row>
           <SearchBar />
@@ -57,7 +41,7 @@ class HomePage extends React.Component {
         <Row className={"movie-list-background d-grid px-5 py-3"}>
           <Row className={"filter-bar"}>
             <Col className={"col-sm-9"}>
-              <GenreGroup onSelect={this.changeGenre} />
+              <GenreGroup onSelect={changeGenre} />
             </Col>
             <Col
               className={
@@ -65,19 +49,19 @@ class HomePage extends React.Component {
               }
             >
               <SortBy
-                defaultSortBy={this.state.sortBy}
-                onChangeSortBy={this.changeSortBy}
+                defaultSortBy={sortBy}
+                onChangeSortBy={changeSortBy}
                 className={"align-content-end"}
               />
             </Col>
           </Row>
           <Row>
-            <ResultCount count={this.state.movies.length} />
+            <ResultCount count={movies.length} />
             <>
-              {this.state.movies.length === 0 ? (
+              {movies.length === 0 ? (
                 <EmptyMovieResultGroup />
               ) : (
-                <MovieResultGroup movies={this.state.movies} />
+                <MovieResultGroup movies={movies} />
               )}
             </>
           </Row>
@@ -86,8 +70,8 @@ class HomePage extends React.Component {
           <Footer />
         </Row>
       </Container>
-    );
-  }
+    </>
+  );
 }
 
 export default HomePage;
