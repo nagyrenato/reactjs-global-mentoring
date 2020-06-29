@@ -36,7 +36,7 @@ function SearchBar() {
                 </div>
             </div>
 
-            <MovieEditForm show={show} handleClose={hideModal}/>
+            {show && <MovieEditForm show={show} handleClose={hideModal}/>}
         </>
     );
 };

@@ -40,16 +40,21 @@ function MovieResultGroup({ movies }) {
         ))}
       </Row>
 
-      <MovieEditForm
-        show={showEditForm}
-        handleClose={hideEditModal}
-        movie={movie}
-      />
-      <MovieDeleteForm
-        show={showDeleteForm}
-        handleClose={hideDeleteModal}
-        movie={movie.id}
-      />
+      {showEditForm && (
+        <MovieEditForm
+          show={showEditForm}
+          handleClose={hideEditModal}
+          movie={movie}
+        />
+      )}
+
+      {showDeleteForm && (
+        <MovieDeleteForm
+          show={showDeleteForm}
+          handleClose={hideDeleteModal}
+          movie={movie.id}
+        />
+      )}
     </>
   );
 }

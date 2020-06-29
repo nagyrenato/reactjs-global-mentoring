@@ -4,9 +4,20 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
 import genres from "../utils/genres";
+import useForm from "../hooks/useForm";
 
-function MovieEditForm({ movie = {}, show, handleClose }) {
-  let title = movie.id ? "Edit movie" : "Add movie";
+const MovieEditForm = ({ movie = {}, show, handleClose }) => {
+  
+  const [formValues, handleChange, resetForm] = useForm({
+    title: movie.title,
+    release_date: movie.release_date, 
+    url: movie.poster_path, 
+    genres: findGenresOptions(movie.genres),
+    overview: movie.overview, 
+    runtime: movie.runtime
+  })
+
+  let modalTitle = movie.id ? "Edit movie" : "Add movie";
   let submitText = movie.id ? "Save" : "Submit";
 
   function findGenresOptions(inputGenres = []) {
@@ -21,7 +32,7 @@ function MovieEditForm({ movie = {}, show, handleClose }) {
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton />
 
-      <div className={"mx-5 mb-4 h2 modal-title"}>{title}</div>
+      <div className={"mx-5 mb-4 h2 modal-title"}>{modalTitle}</div>
       <Form className={"mx-5"}>
         {movie.id && (
           <Form.Group>
@@ -34,7 +45,9 @@ function MovieEditForm({ movie = {}, show, handleClose }) {
           <Form.Control
             type="text"
             placeholder="Title here"
-            value={movie.title}
+            name="title"
+            value={formValues.title}
+            onChange={handleChange}
           />
         </Form.Group>
         <Form.Group>
@@ -42,8 +55,10 @@ function MovieEditForm({ movie = {}, show, handleClose }) {
           <Form.Control
             type="text"
             placeholder="Select date"
-            value={movie.release_date}
-          />{" "}
+            name="release_date"
+            value={formValues.release_date}
+            onChange={handleChange}
+          />
           {/* TODO add a datepicker or something like that */}
         </Form.Group>
         <Form.Group>
@@ -51,7 +66,9 @@ function MovieEditForm({ movie = {}, show, handleClose }) {
           <Form.Control
             type="text"
             placeholder="Movie URL here"
-            value={movie.poster_path}
+            name="url"
+            value={formValues.url}
+            onChange={handleChange}
           />
         </Form.Group>
         <Form.Group>
@@ -60,7 +77,9 @@ function MovieEditForm({ movie = {}, show, handleClose }) {
             isMulti={true}
             options={genres}
             classNamePrefix={"select-genre"}
-            defaultValue={findGenresOptions(movie.genres)}
+            name="genres"
+            onChange={(selectedValues) => handleChange({target: {value: selectedValues, name: "genres" } } )}
+            value={formValues.genres}
             theme={(theme) => ({
               ...theme,
               borderRadius: 6,
@@ -81,7 +100,9 @@ function MovieEditForm({ movie = {}, show, handleClose }) {
           <Form.Control
             type="text"
             placeholder="Overview here"
-            value={movie.overview}
+            name="overview"
+            value={formValues.overview}
+            onChange={handleChange}
           />
         </Form.Group>
         <Form.Group>
@@ -89,13 +110,15 @@ function MovieEditForm({ movie = {}, show, handleClose }) {
           <Form.Control
             type="text"
             placeholder="Runtime here"
-            value={movie.runtime}
+            name="runtime"
+            value={formValues.runtime}
+            onChange={handleChange}
           />
         </Form.Group>
       </Form>
 
       <Modal.Footer className={"mb-5"}>
-        <Button className={"outline shadow-none"} variant={"secondary"}>
+        <Button className={"outline shadow-none"} variant={"secondary"} onClick={resetForm}>
           Reset
         </Button>
         <Button className={"shadow-none"} variant={"secondary"}>
