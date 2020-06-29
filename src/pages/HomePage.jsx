@@ -24,7 +24,6 @@ function HomePage() {
 
   function changeGenre(value) {
     const selectedIndex = genres.findIndex((genre) => genre.label === value);
-    console.log(selectedIndex);
     setGenreIndex(selectedIndex);
   }
 
