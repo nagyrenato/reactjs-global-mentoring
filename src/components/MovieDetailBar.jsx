@@ -5,13 +5,17 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Moment from "react-moment";
-import Link from "react-router-dom/Link";
+
+/** In order to avoid the following error: Warning:
+ *  Please use `require("react-router-dom").Link` instead of `require("react-router-dom/Link")`.
+ *  Support for the latter will be removed in the next major release.
+ */
+const Link = require("react-router-dom").Link;
 
 function MovieDetailBar({ movieList, props }) {
-
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   if (movieList.length === 0) {
     return null;
