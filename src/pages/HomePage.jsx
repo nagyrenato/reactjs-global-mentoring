@@ -13,6 +13,7 @@ import EmptyMovieResultGroup from "../components/EmptyMovieResultGroup";
 import genreOptions from "../utils/genres";
 import sortByOptions from "../utils/sortByOptions";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import ScrollToTop from "../utils/ScrollToTop";
 
 genreOptions.unshift({ value: "all", label: "All" });
 const genres = genreOptions;
@@ -48,6 +49,7 @@ function HomePage() {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <Container>
           <Row>
             <Switch>
