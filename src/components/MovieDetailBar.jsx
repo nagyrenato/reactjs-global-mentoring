@@ -5,24 +5,16 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Moment from "react-moment";
+import Link from "react-router-dom/Link";
 
-function MovieDetailBar({ movieList }) {
-  const currentMovie = {
-    id: 337167,
-    title: "Fifty Shades Freed",
-    tagline: "Don't miss the climax",
-    vote_average: 6.1,
-    vote_count: 1195,
-    release_date: "2018-02-07",
-    poster_path:
-      "https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg",
-    overview:
-      "Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.",
-    budget: 55000000,
-    revenue: 136906000,
-    genres: ["Drama", "Romance"],
-    runtime: 106,
-  };
+function MovieDetailBar({ movieList, props }) {
+  if (movieList.length === 0) {
+    return null;
+  }
+
+  const currentMovie = movieList.find(
+    (movie) => movie.id.toString() === props.match.params.movieId
+  );
 
   return (
     <>
@@ -36,9 +28,11 @@ function MovieDetailBar({ movieList }) {
               </h5>
             </Col>
             <Col className={"text-right"}>
-              <Button className={"btn-search-movie shadow-none"}>
-                <i className="fa fa-search" aria-hidden="true"></i>
-              </Button>
+              <Link to={"/"}>
+                <Button className={"btn-search-movie shadow-none"}>
+                  <i className="fa fa-search" aria-hidden="true"></i>
+                </Button>
+              </Link>
             </Col>
           </Row>
 

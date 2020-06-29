@@ -55,9 +55,13 @@ function HomePage() {
               <Route exact path="/">
                 <SearchBar />
               </Route>
-              <Route exact path="/movies/:movieId">
-                <MovieDetailBar movieList={movies} />
-              </Route>
+              <Route
+                exact
+                path="/movies/:movieId"
+                render={(homeProps) => (
+                  <MovieDetailBar movieList={movies} props={homeProps} />
+                )}
+              />
             </Switch>
           </Row>
           <Row className={"movie-list-background d-grid px-5 py-3"}>
