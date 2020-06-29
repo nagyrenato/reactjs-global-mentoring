@@ -41,7 +41,6 @@ function HomePage() {
         return response.json();
       })
       .then((result) => {
-        console.log(result);
         const moviesResult = result;
         setMovies(moviesResult);
       });
@@ -57,7 +56,7 @@ function HomePage() {
                 <SearchBar />
               </Route>
               <Route exact path="/movies/:movieId">
-                <MovieDetailBar />
+                <MovieDetailBar movieList={movies} />
               </Route>
             </Switch>
           </Row>
