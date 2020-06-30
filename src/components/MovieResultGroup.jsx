@@ -4,6 +4,8 @@ import Col from "react-bootstrap/Col";
 import MovieListItem from "./MovieListItem";
 import MovieEditForm from "./MovieEditForm";
 import MovieDeleteForm from "./MovieDeleteForm";
+import EmptyMovieResultGroup from "./EmptyMovieResultGroup";
+import ResultCount from "./ResultCount";
 
 function MovieResultGroup({ movies }) {
   const [showEditForm, setShowEditForm] = useState(false);
@@ -24,8 +26,13 @@ function MovieResultGroup({ movies }) {
     setShowDeleteForm,
   ]);
 
+  if (movies.length === 0) {
+    return <EmptyMovieResultGroup />
+  }
+
   return (
     <>
+      <ResultCount count={movies.length} />
       <Row>
         {movies.map((movie, key) => (
           <Col key={key} lg={4} md={6} sm={12}>
