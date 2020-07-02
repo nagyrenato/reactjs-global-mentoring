@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import movieList from "./movieList";
+import movies from "./movies";
 
 const rootReducer = combineReducers({
-  movies: movieList,
+  movies: movies,
 });
 
 export default rootReducer;

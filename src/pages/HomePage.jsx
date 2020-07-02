@@ -3,19 +3,22 @@ import Layout from "./Layout";
 import SearchBar from "../components/SearchBar";
 import MovieListSection from "../components/MovieListSection";
 import Footer from "../components/Footer";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fillMovies } from "../actions/index";
 
 function HomePage() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     fetch("../mock-data.json")
       .then((response) => response.json())
-      .then((result) => console.log(result));
-  }, []);
+      .then((result) => dispatch(fillMovies(result)));
+  }, [dispatch]);
 
   return (
     <Layout>
       <SearchBar />
-      <MovieListSection movies={[]} />
+      <MovieListSection />
       <Footer />
     </Layout>
   );
