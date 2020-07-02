@@ -4,7 +4,7 @@ import SearchBar from "../components/SearchBar";
 import MovieListSection from "../components/MovieListSection";
 import Footer from "../components/Footer";
 import { useDispatch } from "react-redux";
-import { fillMovies } from "../actions/index";
+import { setMovies } from "../actions/index";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ function HomePage() {
   useEffect(() => {
     fetch("../mock-data.json")
       .then((response) => response.json())
-      .then((result) => dispatch(fillMovies(result)));
+      .then((result) => dispatch(setMovies(result)));
   }, [dispatch]);
 
   return (

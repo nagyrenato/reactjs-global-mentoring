@@ -1,8 +1,8 @@
-import { FILL_MOVIES } from "../reducers/movies";
+import { SET_MOVIES } from "../reducers/movies";
 
-export const fillMovies = (payload) => {
+export const setMovies = (payload) => {
   return {
-    type: FILL_MOVIES,
+    type: SET_MOVIES,
     payload: payload,
   };
 };

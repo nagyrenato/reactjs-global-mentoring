@@ -1,9 +1,8 @@
-export const FILL_MOVIES = "FILL_MOVIES";
+export const SET_MOVIES = "SET_MOVIES";
 
 const movies = (state = [], action) => {
-  console.log(action);
   switch (action.type) {
-    case FILL_MOVIES:
+    case SET_MOVIES:
       state = action.payload;
       return state;
     default:
