@@ -12,7 +12,8 @@ function HomePage() {
   useEffect(() => {
     fetch("../mock-data.json")
       .then((response) => response.json())
-      .then((result) => dispatch(setMovies(result)));
+      .then((result) => dispatch(setMovies(result)))
+      .catch((error) => dispatch(setMovies([])));
   }, [dispatch]);
 
   return (

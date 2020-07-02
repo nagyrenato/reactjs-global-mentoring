@@ -59,7 +59,7 @@ function MovieResultGroup({ movies }) {
         <MovieDeleteForm
           show={showDeleteForm}
           handleClose={hideDeleteModal}
-          movie={movie.id}
+          movie={movie}
         />
       )}
     </>

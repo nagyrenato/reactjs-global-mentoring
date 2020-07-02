@@ -27,6 +27,7 @@ function MovieListItem({ movie, onEdit, onDelete, setMovie }) {
             <DropdownItem
               onClick={() => {
                 onDelete();
+                setMovie(movie);
               }}
             >
               Delete

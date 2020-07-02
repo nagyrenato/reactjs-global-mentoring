@@ -5,17 +5,18 @@ import Button from "react-bootstrap/Button";
 import Select from "react-select";
 import genres from "../utils/genres";
 import useForm from "../hooks/useForm";
+import { UPDATE_MOVIE, ADD_MOVIE } from "../reducers/movies";
+import { useDispatch } from "react-redux";
 
 const MovieEditForm = ({ movie = {}, show, handleClose }) => {
-  
   const [formValues, handleChange, resetForm] = useForm({
     title: movie.title,
-    release_date: movie.release_date, 
-    url: movie.poster_path, 
+    releaseDate: movie.release_date,
+    url: movie.poster_path,
     genres: findGenresOptions(movie.genres),
-    overview: movie.overview, 
+    overview: movie.overview,
     runtime: movie.runtime
-  })
+  });
 
   let modalTitle = movie.id ? "Edit movie" : "Add movie";
   let submitText = movie.id ? "Save" : "Submit";
@@ -27,6 +28,24 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
         : null;
     });
   }
+
+  const dispatch = useDispatch();
+
+  const randomNumber = (min = 100000, max = 999999) =>
+    Math.floor(Math.random() * (max - min + 1)) + min;
+
+  const action = {
+    type: movie.id ? UPDATE_MOVIE : ADD_MOVIE,
+    payload: {
+      id: movie.id || randomNumber(), //TODO should be generated for new movie on server side
+      title: formValues.title,
+      release_date: formValues.releaseDate,
+      poster_path: formValues.url,
+      genres: formValues.genres.map(option => option.label),
+      overview: formValues.overview,
+      runtime: formValues.runtime,
+    },
+  };
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -55,8 +74,8 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
           <Form.Control
             type="text"
             placeholder="Select date"
-            name="release_date"
-            value={formValues.release_date}
+            name="releaseDate"
+            value={formValues.releaseDate}
             onChange={handleChange}
           />
           {/* TODO add a datepicker or something like that */}
@@ -78,7 +97,11 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
             options={genres}
             classNamePrefix={"select-genre"}
             name="genres"
-            onChange={(selectedValues) => handleChange({target: {value: selectedValues, name: "genres" } } )}
+            onChange={(selectedValues) =>
+              handleChange({
+                target: { value: selectedValues, name: "genres" },
+              })
+            }
             value={formValues.genres}
             theme={(theme) => ({
               ...theme,
@@ -118,15 +141,26 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
       </Form>
 
       <Modal.Footer className={"mb-5"}>
-        <Button className={"outline shadow-none"} variant={"secondary"} onClick={resetForm}>
+        <Button
+          className={"outline shadow-none"}
+          variant={"secondary"}
+          onClick={resetForm}
+        >
           Reset
         </Button>
-        <Button className={"shadow-none"} variant={"secondary"}>
+        <Button
+          className={"shadow-none"}
+          variant={"secondary"}
+          onClick={() => {
+            dispatch(action);
+            handleClose();
+          }}
+        >
           {submitText}
         </Button>
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
 export default MovieEditForm;
