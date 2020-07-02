@@ -6,19 +6,22 @@ import * as serviceWorker from "./serviceWorker";
 import "font-awesome/css/font-awesome.min.css";
 import { createStore } from "redux";
 import rootReducer from "./reducers";
+import { Provider } from "react-redux";
 
 // Importing the Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const store = createStore(
+const mainStore = createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={mainStore}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById("root")
 );
 
