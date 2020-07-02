@@ -3,10 +3,10 @@ import Layout from "./Layout";
 import SearchBar from "../components/SearchBar";
 import MovieListSection from "../components/MovieListSection";
 import Footer from "../components/Footer";
+import { useSelector } from "react-redux";
 
 function HomePage() {
-  //TODO use redux for movies
-  const [movies, setMovies] = useState([]);
+  const movies = useSelector((state) => state.movies);
 
   useEffect(() => {
     fetch("../mock-data.json")
