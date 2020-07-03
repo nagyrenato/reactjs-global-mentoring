@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import MovieListItem from "./MovieListItem";
@@ -11,6 +12,11 @@ function MovieResultGroup({ movies }) {
   const [showEditForm, setShowEditForm] = useState(false);
   const [showDeleteForm, setShowDeleteForm] = useState(false);
   const [movie, setMovie] = useState({});
+  const genre = useSelector((state) => state.genre);
+  let filteredMovies = movies;
+  if (genre !== "All") {
+    filteredMovies = movies.filter((movie) => movie.genres.includes(genre));
+  }
 
   const hideEditModal = useCallback(() => setShowEditForm(false), [
     setShowEditForm,
@@ -27,14 +33,14 @@ function MovieResultGroup({ movies }) {
   ]);
 
   if (movies.length === 0) {
-    return <EmptyMovieResultGroup />
+    return <EmptyMovieResultGroup />;
   }
 
   return (
     <>
-      <ResultCount count={movies.length} />
+      <ResultCount count={filteredMovies.length} />
       <Row>
-        {movies.map((movie, key) => (
+        {filteredMovies.map((movie, key) => (
           <Col key={key} lg={4} md={6} sm={12}>
             <MovieListItem
               key={movie.id}

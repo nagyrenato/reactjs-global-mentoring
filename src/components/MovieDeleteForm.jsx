@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
-import { DELETE_MOVIE } from "../reducers/movies";
+import { DELETE_MOVIE } from "../reducers/Movies";
 
 function MovieDeleteForm({ movie, show, handleClose }) {
   const dispatch = useDispatch();

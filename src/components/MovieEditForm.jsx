@@ -3,9 +3,9 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
-import genres from "../utils/genres";
+import genres from "../utils/Genres";
 import useForm from "../hooks/useForm";
-import { UPDATE_MOVIE, ADD_MOVIE } from "../reducers/movies";
+import { UPDATE_MOVIE, ADD_MOVIE } from "../reducers/Movies";
 import { useDispatch } from "react-redux";
 
 const MovieEditForm = ({ movie = {}, show, handleClose }) => {
@@ -15,7 +15,7 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
     url: movie.poster_path,
     genres: findGenresOptions(movie.genres),
     overview: movie.overview,
-    runtime: movie.runtime
+    runtime: movie.runtime,
   });
 
   let modalTitle = movie.id ? "Edit movie" : "Add movie";
@@ -41,7 +41,7 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
       title: formValues.title,
       release_date: formValues.releaseDate,
       poster_path: formValues.url,
-      genres: formValues.genres.map(option => option.label),
+      genres: formValues.genres.map((option) => option.label),
       overview: formValues.overview,
       runtime: formValues.runtime,
     },

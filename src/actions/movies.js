@@ -1,4 +1,4 @@
-import { SET_MOVIES } from "../reducers/movies";
+import { SET_MOVIES } from "../reducers/Movies";
 
 export const setMovies = (payload) => {
   return {

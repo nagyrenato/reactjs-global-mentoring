@@ -4,23 +4,27 @@ import Layout from "./Layout";
 import MovieDetailBar from "../components/MovieDetailBar";
 import MovieListSection from "../components/MovieListSection";
 import Footer from "../components/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { setMovies } from "../actions/movies";
 
 function MovieDetailPage() {
-  //TODO use redux for movies
-  const [movies, setMovies] = useState([]);
+  const dispatch = useDispatch();
+  const movies = useSelector((state) => state.movies);
+
   const [movie, setMovie] = useState({});
   const { movieId } = useParams();
 
-  useEffect(() => {
+  if (movies.length === 0) {
     fetch("../mock-data.json")
       .then((response) => response.json())
-      .then((result) => setMovies(result));
-  }, []);
+      .then((result) => dispatch(setMovies(result)))
+      .catch((error) => dispatch(setMovies([])));
+  }
 
   useEffect(() => {
-    let movieById = movies.find(m => m.id.toString() === movieId);
-    setMovie(movieById)
-  }, [movies, movieId])
+    let movieById = movies.find((m) => m.id.toString() === movieId);
+    setMovie(movieById);
+  }, [movies, movieId]);
 
   return (
     <Layout>
