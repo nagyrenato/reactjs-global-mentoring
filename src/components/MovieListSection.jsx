@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import FilterPanel from "./FilterPanel";
 import MovieResultGroup from "./MovieResultGroup";
 import { useDispatch, useSelector } from "react-redux";
-import { setMovies } from "../actions/movies";
+import { setMovies } from "../store/actions/movies";
 
 const MovieListSection = () => {
   const dispatch = useDispatch();

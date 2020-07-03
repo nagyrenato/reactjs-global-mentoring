@@ -5,7 +5,7 @@ import MovieDetailBar from "../components/MovieDetailBar";
 import MovieListSection from "../components/MovieListSection";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { setMovies } from "../actions/movies";
+import { setMovies } from "../store/actions/movies";
 
 function MovieDetailPage() {
   const dispatch = useDispatch();

@@ -12,6 +12,7 @@ function MovieResultGroup({ movies }) {
   const [showEditForm, setShowEditForm] = useState(false);
   const [showDeleteForm, setShowDeleteForm] = useState(false);
   const [movie, setMovie] = useState({});
+
   const genre = useSelector((state) => state.genre);
   let filteredMovies = movies;
   if (genre !== "All") {
@@ -32,7 +33,7 @@ function MovieResultGroup({ movies }) {
     setShowDeleteForm,
   ]);
 
-  if (movies.length === 0) {
+  if (filteredMovies.length === 0) {
     return <EmptyMovieResultGroup />;
   }
 
