@@ -3,17 +3,10 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
-import { DELETE_MOVIE } from "../reducers/movies";
+import { deleteMovieFromDb } from "../store/actions/movies"
 
 function MovieDeleteForm({ movie, show, handleClose }) {
   const dispatch = useDispatch();
-
-  const deleteMovieAction = {
-    type: DELETE_MOVIE,
-    payload: {
-      id: movie.id,
-    },
-  };
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -33,7 +26,7 @@ function MovieDeleteForm({ movie, show, handleClose }) {
           className={"shadow-none"}
           variant={"secondary"}
           onClick={() => {
-            dispatch(deleteMovieAction);
+            dispatch(deleteMovieFromDb(movie.id));
             handleClose();
           }}
         >

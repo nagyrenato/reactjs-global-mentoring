@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import Select from "react-select";
 import genres from "../utils/genres";
 import useForm from "../hooks/useForm";
-import { UPDATE_MOVIE, ADD_MOVIE } from "../reducers/movies";
 import { useDispatch } from "react-redux";
 
 const MovieEditForm = ({ movie = {}, show, handleClose }) => {
@@ -35,8 +34,10 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
     Math.floor(Math.random() * (max - min + 1)) + min;
 
   const action = {
-    type: movie.id ? UPDATE_MOVIE : ADD_MOVIE,
+    // TODO use redux actions instead
+    type: movie.id ? "UPDATE_MOVIE" : "ADD_MOVIE",
     payload: {
+      ...movie, 
       id: movie.id || randomNumber(), //TODO should be generated for new movie on server side
       title: formValues.title,
       release_date: formValues.releaseDate,

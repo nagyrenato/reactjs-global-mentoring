@@ -1,31 +1,24 @@
-export const SET_MOVIES = "SET_MOVIES";
-export const ADD_MOVIE = "ADD_MOVIE";
-export const UPDATE_MOVIE = "UPDATE_MOVIE";
-export const DELETE_MOVIE = "DELETE_MOVIE";
+import * as actionTypes from "../actions/actionTypes";
 
 const moviesReducer = (movies = [], action) => {
   switch (action.type) {
     
-    case SET_MOVIES: {
-      movies = [...action.payload];
-      return movies;
-    }
-    
-    case ADD_MOVIE: {
+    case actionTypes.SET_MOVIES:
+      return [...action.payload];
+
+    case actionTypes.ADD_MOVIE:
       return [...movies].concat(action.payload);
-    }
-    
-    case UPDATE_MOVIE: {
+
+    case actionTypes.UPDATE_MOVIE: {
       const updatedMovies = [...movies];
       const indexOfUpdatedMovie = updatedMovies.findIndex(movie => movie.id === action.payload.id);
       updatedMovies[indexOfUpdatedMovie] = action.payload;
       return updatedMovies;
     }
       
-    case DELETE_MOVIE: {
+    case actionTypes.DELETE_MOVIE:
       return [...movies].filter(movie => movie.id !== action.payload.id);
-    }
-      
+
     default:
       return movies;
   }
