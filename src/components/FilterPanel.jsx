@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import SortBy from "./SortBy";
 import GenreGroup from "./GenreGroup";
 import genreOptions from "../utils/Genres";
-import sortByOptions from "../utils/SortByOptions";
+import { RELEASE_DATE, TITLE, RATING } from "../utils/SortByOptions";
 import { useDispatch, useSelector } from "react-redux";
 import { setSortBy } from "../store/actions/sortBy";
 import { setGenre } from "../store/actions/genre";
@@ -31,7 +31,7 @@ const FilterPanel = () => {
         className="justify-content-end align-items-center d-flex"
       >
         <SortBy
-          sortByOptions={sortByOptions}
+          sortByOptions={[RELEASE_DATE, TITLE, RATING]}
           title={title}
           onChangeSortBy={(value) => {
             dispatch(setSortBy(value));

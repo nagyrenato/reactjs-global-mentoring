@@ -15,11 +15,11 @@ function SortBy({ sortByOptions, title, onChangeSortBy }) {
       >
         {sortByOptions.map((sortByOption, idx) => (
           <Dropdown.Item
-            eventKey={sortByOption.label}
+            eventKey={sortByOption}
             key={idx}
             className={"text-uppercase"}
           >
-            {sortByOption.label}
+            {sortByOption}
           </Dropdown.Item>
         ))}
       </DropdownButton>

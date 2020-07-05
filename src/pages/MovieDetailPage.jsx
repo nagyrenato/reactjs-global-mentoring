@@ -22,9 +22,9 @@ function MovieDetailPage() {
   }
 
   useEffect(() => {
-    let movieById = movies.find((m) => m.id.toString() === movieId);
+    let movieById = movies.find((m) => `${movie?.id}` === movieId);
     setMovie(movieById);
-  }, [movies, movieId]);
+  }, [movie, movies, movieId]);
 
   return (
     <Layout>

@@ -1,7 +1,3 @@
-const sortByOptions = [
-  { value: "release_date", label: "Release date" },
-  { value: "genre", label: "Genre" },
-  { value: "rating", label: "Rating" },
-];
-
-export default sortByOptions;
+export const RELEASE_DATE = "release date";
+export const RATING = "rating";
+export const TITLE = "title";
