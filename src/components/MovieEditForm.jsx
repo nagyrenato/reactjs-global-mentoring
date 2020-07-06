@@ -6,6 +6,7 @@ import Select from "react-select";
 import genres from "../utils/Genres";
 import useForm from "../hooks/useForm";
 import { useDispatch } from "react-redux";
+import { upsertMovie } from "../store/actions/movies";
 
 const MovieEditForm = ({ movie = {}, show, handleClose }) => {
   const [formValues, handleChange, resetForm] = useForm({
@@ -30,22 +31,17 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
 
   const dispatch = useDispatch();
 
-  const randomNumber = (min = 100000, max = 999999) =>
-    Math.floor(Math.random() * (max - min + 1)) + min;
-
-  const action = {
-    // TODO use redux actions instead
-    type: movie.id ? "UPDATE_MOVIE" : "ADD_MOVIE",
-    payload: {
+  const getMovieFromUserInput = () => {
+    return {
       ...movie,
-      id: movie.id || randomNumber(), //TODO should be generated for new movie on server side
+      id: movie.id,
       title: formValues.title,
       release_date: formValues.releaseDate,
       poster_path: formValues.url,
       genres: formValues.genres.map((option) => option.label),
       overview: formValues.overview,
-      runtime: formValues.runtime,
-    },
+      runtime: parseInt(formValues.runtime),
+    };
   };
 
   return (
@@ -153,7 +149,7 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
           className={"shadow-none"}
           variant={"secondary"}
           onClick={() => {
-            dispatch(action);
+            dispatch(upsertMovie(getMovieFromUserInput()));
             handleClose();
           }}
         >
