@@ -31,9 +31,9 @@ const FilterPanel = () => {
         className="justify-content-end align-items-center d-flex"
       >
         <SortBy
-          sortByOptions={[RELEASE_DATE, TITLE, RATING]}
-          title={title}
-          onChangeSortBy={(value) => {
+          options={[RELEASE_DATE, TITLE, RATING]}
+          selected={title}
+          onChange={(value) => {
             dispatch(setSortBy(value));
           }}
           className="align-content-end"
