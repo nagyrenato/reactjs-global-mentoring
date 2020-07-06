@@ -44,7 +44,13 @@ function MovieDetailBar({ movie }) {
               <Col className={"col-8"}>
                 <Row>
                   <h1 className={"title"}>{movie.title}</h1>
-                  <h1 className={"rating"}>{movie.vote_average}</h1>
+                  {movie.vote_average > 0 && (
+                    <h1 className={"rating"}>
+                      {movie.vote_average < 10
+                        ? movie.vote_average.toFixed(1)
+                        : movie.vote_average}
+                    </h1>
+                  )}
                 </Row>
                 <Row>
                   <p className={"tagline"}>{movie.tagline}</p>
