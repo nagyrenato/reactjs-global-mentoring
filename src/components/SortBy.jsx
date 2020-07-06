@@ -2,7 +2,7 @@ import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
-function SortBy({ options, selected, onChange}) {
+function SortBy({ options, selected, onChange }) {
   return (
     <div className={"justify-content-center align-items-center d-flex"}>
       <span className={"text-uppercase mr-3"}>Sort by</span>
@@ -10,10 +10,10 @@ function SortBy({ options, selected, onChange}) {
         variant={"none"}
         className={"btn-sort-by"}
         id="dropdown-item-button"
-        title={title}
-        onSelect={onChangeSortBy}
+        title={selected}
+        onSelect={onChange}
       >
-        {sortByOptions.map((sortByOption, idx) => (
+        {options.map((sortByOption, idx) => (
           <Dropdown.Item
             eventKey={sortByOption}
             key={idx}
