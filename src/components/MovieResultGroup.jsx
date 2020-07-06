@@ -23,12 +23,6 @@ function MovieResultGroup({ movies }) {
     filteredMovies = movies.filter((movie) => movie.genres.includes(genre));
   }
 
-  /*
-   * Well. I had an idea to handle this compare switch dinamically with the following idea:
-   * Extend the sortByOptions with a structure that store the JSON parameter for the sorting order and use it like an object property
-   * For example: RELEASE_DATE -> movie1[release_date] and so on.
-   * But, I decided not to do it for now, I'm sorry for this mess here.
-   */
   switch (sortBy) {
     case RELEASE_DATE:
       filteredMovies.sort((movie1, movie2) =>
