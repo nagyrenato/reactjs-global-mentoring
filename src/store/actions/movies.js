@@ -8,11 +8,25 @@ export const setMovies = (movies) => {
   };
 };
 
+export const fetchMovie = (movieId) => {
+  let fetchUrl = `http://localhost:4000/movies/${movieId}`;
+  return fetch(fetchUrl, {
+    method: "get",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      console.log("Error happened: ", error.message);
+    });
+};
+
 export const fetchMovies = (queryParams) => {
   let fetchUrlBase = `http://localhost:4000/movies?limit=12`;
   let fetchUrl = [fetchUrlBase, queryParams].filter(Boolean).join("&");
-  console.log(fetchUrl);
-
   return (dispatch) => {
     fetch(fetchUrl, {
       method: "get",

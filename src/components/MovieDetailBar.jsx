@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Moment from "react-moment";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { fetchMovie } from "../store/actions/movies";
 
-function MovieDetailBar({ movie }) {
+function MovieDetailBar() {
+  const { movieId } = useParams();
+  const [movie, setMovie] = useState({});
+
+  useEffect(() => {
+    const fetchedMovie = fetchMovie(movieId);
+    setMovie(Promise.resolve(fetchedMovie).then((value) => setMovie(value)));
+  }, [movieId]);
+
   return (
     <>
       <div className={"movie-detail-box mb-3"}>
