@@ -14,7 +14,7 @@ function MovieDetailBar() {
 
   useEffect(() => {
     const fetchedMovie = fetchMovie(movieId);
-    setMovie(Promise.resolve(fetchedMovie).then((value) => setMovie(value)));
+    setMovie(Promise.resolve(fetchedMovie).then(setMovie));
   }, [movieId]);
 
   return (
