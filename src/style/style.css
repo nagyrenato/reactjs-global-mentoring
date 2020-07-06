@@ -53,7 +53,15 @@ html {
   overflow: hidden;
 }
 
-.search-box-foreground {
+.movie-detail-box {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.search-box-foreground,
+.movie-detail-box-foreground {
   position: absolute;
   top: 0;
   left: 0;
@@ -77,14 +85,74 @@ html {
   background-size: cover;
 }
 
+.movie-detail-box-background {
+  width: 100%;
+  height: 600px;
+
+  background: url("./img/movies-header.jpg");
+
+  /* Add the blur effect */
+  filter: blur(4px) brightness(0.25);
+  -webkit-filter: blur(4px) brightness(0.25);
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .search-box .logo,
+.movie-detail-box .logo,
 .footer .logo {
   color: #f65261;
 }
 
-.search-box .title {
+.search-box .title,
+.movie-detail-box .tagline {
   text-transform: uppercase;
   font-weight: lighter;
+}
+
+.movie-detail-box .title {
+  text-transform: uppercase;
+  font-weight: lighter;
+  padding: 10px 40px 0px 0px;
+}
+
+.movie-detail-box .year {
+  text-transform: uppercase;
+  font-weight: lighter;
+  color: #f65261;
+  margin-right: 1em;
+  font-size: x-large;
+}
+
+.movie-detail-box .runtime {
+  font-weight: lighter;
+  color: #f65261;
+  font-size: x-large;
+}
+
+.movie-detail-box .btn-search-movie,
+.movie-detail-box .btn-search-movie:active:focus {
+  background-color: rgba(128, 128, 128, 0);
+  color: #f65261;
+  border: none;
+  text-transform: uppercase;
+}
+
+.movie-detail-box .overview {
+  width: 80%;
+}
+
+.movie-detail-box .rating {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 45px;
+  padding: 10px;
+  border-color: #ffffff;
+  color: #00ff00;
+  font-weight: lighter;
+  border-style: solid;
 }
 
 .dropdown .btn,

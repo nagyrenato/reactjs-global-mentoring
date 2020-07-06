@@ -7,7 +7,15 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 import Image from "react-bootstrap/Image";
 import Moment from "react-moment";
 
-const MovieListItem = ({ movie, onEdit, onDelete, setMovie }) => {
+/** In order to avoid the following error: Warning:
+ *  Please use `require("react-router-dom").Link` instead of `require("react-router-dom/Link")`.
+ *  Support for the latter will be removed in the next major release.
+ */
+const Link = require("react-router-dom").Link;
+
+function MovieListItem({ movie, onEdit, onDelete, setMovie }) {
+  function handleImageOnClick() {}
+
   return (
     <Container className={"px-0 mb-5 movie-item"}>
       <Row className={"mb-3"}>
@@ -29,15 +37,18 @@ const MovieListItem = ({ movie, onEdit, onDelete, setMovie }) => {
               Delete
             </DropdownItem>
           </DropdownButton>
-          <Image
-            fluid
-            src={movie.poster_path}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src =
-                "https://via.placeholder.com/500x750.png&text=No+Picture";
-            }}
-          />
+          <Link to={"/movies/" + movie.id}>
+            <Image
+              onClick={handleImageOnClick}
+              fluid
+              src={movie.poster_path}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src =
+                  "https://via.placeholder.com/500x750.png&text=No+Picture";
+              }}
+            />
+          </Link>
         </Col>
       </Row>
       <Row className={"mb-2 opacity-4"}>
@@ -60,6 +71,6 @@ const MovieListItem = ({ movie, onEdit, onDelete, setMovie }) => {
       </Row>
     </Container>
   );
-};
+}
 
 export default MovieListItem;

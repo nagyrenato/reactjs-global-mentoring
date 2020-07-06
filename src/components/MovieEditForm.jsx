@@ -1,87 +1,132 @@
-import React from 'react';
+import React from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
+import genres from "../utils/genres";
+import useForm from "../hooks/useForm";
 
-const genres = [
-    {value: "Action", label: "Action"},
-    {value: "Animation", label: "Animation"},
-    {value: "Comedy", label: "Comedy"},
-    {value: "Drama", label: "Drama"},
-    {value: "Family", label: "Family"},
-    {value: "Horror", label: "Horror"}
-]
+const MovieEditForm = ({ movie = {}, show, handleClose }) => {
+  
+  const [formValues, handleChange, resetForm] = useForm({
+    title: movie.title,
+    release_date: movie.release_date, 
+    url: movie.poster_path, 
+    genres: findGenresOptions(movie.genres),
+    overview: movie.overview, 
+    runtime: movie.runtime
+  })
 
-function MovieEditForm({movie = {}, show, handleClose}) {
-    let title = movie.id ? "Edit movie" : "Add movie";
-    let submitText = movie.id ? "Save" : "Submit";
+  let modalTitle = movie.id ? "Edit movie" : "Add movie";
+  let submitText = movie.id ? "Save" : "Submit";
 
-    function findGenresOptions(inputGenres = []) {
-        return genres.filter(genre => {
-            return inputGenres.filter(input => input === genre.value).length > 0 ? genre : null
-        });
-    }
+  function findGenresOptions(inputGenres = []) {
+    return genres.filter((genre) => {
+      return inputGenres.filter((input) => input === genre.value).length > 0
+        ? genre
+        : null;
+    });
+  }
 
-    return (
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton/>
+  return (
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton />
 
-            <div className={"mx-5 mb-4 h2 modal-title"}>{title}</div>
-            <Form className={"mx-5"}>
-                {movie.id &&
-                <Form.Group>
-                    <Form.Label>Movie ID</Form.Label>
-                    <Form.Text className={"movie-id"}>{movie.id}</Form.Text>
-                </Form.Group>
-                }
-                <Form.Group>
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control type="text" placeholder="Title here" value={movie.title}/>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Release date</Form.Label>
-                    <Form.Control type="text" placeholder="Select date"
-                                  value={movie.release_date}/> {/* TODO add a datepicker or something like that */}
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Movie URL</Form.Label>
-                    <Form.Control type="text" placeholder="Movie URL here" value={movie.poster_path}/>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Genre</Form.Label>
-                    <Select isMulti={true} options={genres} classNamePrefix={"select-genre"}
-                            defaultValue={findGenresOptions(movie.genres)}
-                            theme={theme => ({
-                                ...theme,
-                                borderRadius: 6,
-                                colors: {
-                                    ...theme.colors,
-                                    primary25: '#555555',
-                                    primary: '#000000',
-                                    neutral0: '#323232',
-                                    neutral70: '#555555',
-                                    danger: '#555555',
-                                    dangerLight: '#cccccc'
-                                },
-                            })}/>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Overview</Form.Label>
-                    <Form.Control type="text" placeholder="Overview here" value={movie.overview}/>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Runtime</Form.Label>
-                    <Form.Control type="text" placeholder="Runtime here" value={movie.runtime}/>
-                </Form.Group>
-            </Form>
+      <div className={"mx-5 mb-4 h2 modal-title"}>{modalTitle}</div>
+      <Form className={"mx-5"}>
+        {movie.id && (
+          <Form.Group>
+            <Form.Label>Movie ID</Form.Label>
+            <Form.Text className={"movie-id"}>{movie.id}</Form.Text>
+          </Form.Group>
+        )}
+        <Form.Group>
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Title here"
+            name="title"
+            value={formValues.title}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Release date</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Select date"
+            name="release_date"
+            value={formValues.release_date}
+            onChange={handleChange}
+          />
+          {/* TODO add a datepicker or something like that */}
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Movie URL</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Movie URL here"
+            name="url"
+            value={formValues.url}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Genre</Form.Label>
+          <Select
+            isMulti={true}
+            options={genres}
+            classNamePrefix={"select-genre"}
+            name="genres"
+            onChange={(selectedValues) => handleChange({target: {value: selectedValues, name: "genres" } } )}
+            value={formValues.genres}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 6,
+              colors: {
+                ...theme.colors,
+                primary25: "#555555",
+                primary: "#000000",
+                neutral0: "#323232",
+                neutral70: "#555555",
+                danger: "#555555",
+                dangerLight: "#cccccc",
+              },
+            })}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Overview</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Overview here"
+            name="overview"
+            value={formValues.overview}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Runtime</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Runtime here"
+            name="runtime"
+            value={formValues.runtime}
+            onChange={handleChange}
+          />
+        </Form.Group>
+      </Form>
 
-            <Modal.Footer className={"mb-5"}>
-                <Button className={"outline shadow-none"} variant={"secondary"}>Reset</Button>
-                <Button className={"shadow-none"} variant={"secondary"}>{submitText}</Button>
-            </Modal.Footer>
-        </Modal>
-    );
+      <Modal.Footer className={"mb-5"}>
+        <Button className={"outline shadow-none"} variant={"secondary"} onClick={resetForm}>
+          Reset
+        </Button>
+        <Button className={"shadow-none"} variant={"secondary"}>
+          {submitText}
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
 }
 
 export default MovieEditForm;
