@@ -3,19 +3,20 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
-import genres from "../utils/genres";
+import genres from "../utils/Genres";
 import useForm from "../hooks/useForm";
+import { useDispatch } from "react-redux";
+import { upsertMovie } from "../store/actions/movies";
 
 const MovieEditForm = ({ movie = {}, show, handleClose }) => {
-  
   const [formValues, handleChange, resetForm] = useForm({
     title: movie.title,
-    release_date: movie.release_date, 
-    url: movie.poster_path, 
+    releaseDate: movie.release_date,
+    url: movie.poster_path,
     genres: findGenresOptions(movie.genres),
-    overview: movie.overview, 
-    runtime: movie.runtime
-  })
+    overview: movie.overview,
+    runtime: movie.runtime,
+  });
 
   let modalTitle = movie.id ? "Edit movie" : "Add movie";
   let submitText = movie.id ? "Save" : "Submit";
@@ -27,6 +28,21 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
         : null;
     });
   }
+
+  const dispatch = useDispatch();
+
+  const getMovieFromUserInput = () => {
+    return {
+      ...movie,
+      id: movie.id,
+      title: formValues.title,
+      release_date: formValues.releaseDate,
+      poster_path: formValues.url,
+      genres: formValues.genres.map((option) => option.label),
+      overview: formValues.overview,
+      runtime: parseInt(formValues.runtime),
+    };
+  };
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -55,8 +71,8 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
           <Form.Control
             type="text"
             placeholder="Select date"
-            name="release_date"
-            value={formValues.release_date}
+            name="releaseDate"
+            value={formValues.releaseDate}
             onChange={handleChange}
           />
           {/* TODO add a datepicker or something like that */}
@@ -78,7 +94,11 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
             options={genres}
             classNamePrefix={"select-genre"}
             name="genres"
-            onChange={(selectedValues) => handleChange({target: {value: selectedValues, name: "genres" } } )}
+            onChange={(selectedValues) =>
+              handleChange({
+                target: { value: selectedValues, name: "genres" },
+              })
+            }
             value={formValues.genres}
             theme={(theme) => ({
               ...theme,
@@ -118,15 +138,26 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
       </Form>
 
       <Modal.Footer className={"mb-5"}>
-        <Button className={"outline shadow-none"} variant={"secondary"} onClick={resetForm}>
+        <Button
+          className={"outline shadow-none"}
+          variant={"secondary"}
+          onClick={resetForm}
+        >
           Reset
         </Button>
-        <Button className={"shadow-none"} variant={"secondary"}>
+        <Button
+          className={"shadow-none"}
+          variant={"secondary"}
+          onClick={() => {
+            dispatch(upsertMovie(getMovieFromUserInput()));
+            handleClose();
+          }}
+        >
           {submitText}
         </Button>
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
 export default MovieEditForm;

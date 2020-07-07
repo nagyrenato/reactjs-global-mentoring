@@ -1,29 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Moment from "react-moment";
+import { Link, useParams } from "react-router-dom";
+import { fetchMovie } from "../store/actions/movies";
 
-/** In order to avoid the following error: Warning:
- *  Please use `require("react-router-dom").Link` instead of `require("react-router-dom/Link")`.
- *  Support for the latter will be removed in the next major release.
- */
-const Link = require("react-router-dom").Link;
+function MovieDetailBar() {
+  const { movieId } = useParams();
+  const [movie, setMovie] = useState({});
 
-function MovieDetailBar({ movieList, props }) {
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  if (movieList.length === 0) {
-    return null;
-  }
-
-  const currentMovie = movieList.find(
-    (movie) => movie.id.toString() === props.match.params.movieId
-  );
+    const fetchedMovie = fetchMovie(movieId);
+    setMovie(Promise.resolve(fetchedMovie).then(setMovie));
+  }, [movieId]);
 
   return (
     <>
@@ -50,7 +42,7 @@ function MovieDetailBar({ movieList, props }) {
               <Col className={"col-4"}>
                 <Image
                   height={400}
-                  src={currentMovie.poster_path}
+                  src={movie.poster_path}
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src =
@@ -60,20 +52,26 @@ function MovieDetailBar({ movieList, props }) {
               </Col>
               <Col className={"col-8"}>
                 <Row>
-                  <h1 className={"title"}>{currentMovie.title}</h1>
-                  <h1 className={"rating"}>{currentMovie.vote_average}</h1>
+                  <h1 className={"title"}>{movie.title}</h1>
+                  {movie.vote_average > 0 && (
+                    <h1 className={"rating"}>
+                      {movie.vote_average < 10
+                        ? movie.vote_average.toFixed(1)
+                        : movie.vote_average}
+                    </h1>
+                  )}
                 </Row>
                 <Row>
-                  <p className={"tagline"}>{currentMovie.tagline}</p>
+                  <p className={"tagline"}>{movie.tagline}</p>
                 </Row>
                 <Row>
                   <p className={"year"}>
-                    <Moment date={currentMovie.release_date} format={"YYYY"} />
+                    <Moment date={movie.release_date} format={"YYYY"} />
                   </p>
-                  <p className={"runtime"}>{currentMovie.runtime} min</p>
+                  <p className={"runtime"}>{movie.runtime} min</p>
                 </Row>
                 <Row>
-                  <p className={"overview"}>{currentMovie.overview}</p>
+                  <p className={"overview"}>{movie.overview}</p>
                 </Row>
               </Col>
             </Row>
