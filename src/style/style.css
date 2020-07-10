@@ -290,7 +290,7 @@ html {
 }
 
 .modal-content input.form-control,
-.modal-content input.form-control:focus {
+.modal-content input.form-control:focus{
   background-color: rgba(66, 66, 66, 0.5);
   width: 100%;
   border: none;
@@ -299,26 +299,33 @@ html {
   color: #ffffff;
 }
 
-.modal-content .select-genre__control {
+.modal-content textarea,
+.modal-content textarea:focus {
   background-color: rgba(66, 66, 66, 0.5);
   width: 100%;
   border: none;
   border-radius: 3px;
-  padding: 7px;
-  box-shadow: none !important;
+  padding: 15px 20px;
+  color: #ffffff;
+  text-align: justify;
+  height: 100%;
 }
 
-.modal-content .select-genre__indicators .select-genre__indicator-separator {
-  background-color: #f65261;
+.multi-select {
+  --rmsc-primary: #666666 !important;
+  --rmsc-hover: #555555 !important;
+  --rmsc-selected: #666666 !important;
+  --rmsc-border: #666666 !important;
+  --rmsc-gray: #aaa !important;
+  --rmsc-background: #333333 !important;
+  --rmsc-spacing: 10px !important;
+  --rmsc-border-radius: 4px !important;
+  --rmsc-height: 38px !important;
 }
 
-.modal-content .select-genre__multi-value__remove {
-  color: #424242;
-}
-
-.modal-content .select-genre__indicators .select-genre__clear-indicator,
-.modal-content .select-genre__indicators .select-genre__dropdown-indicator {
-  color: #f65261;
+.multi-select .dropdown-container, .multi-select .dropdown-container:focus, .multi-select .dropdown-container:active {
+  padding: 5px 10px;
+  border: none !important;
 }
 
 .modal-content input:focus {

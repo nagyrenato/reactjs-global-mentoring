@@ -8,8 +8,9 @@ import { RELEASE_DATE, TITLE, RATING } from "../utils/SortByOptions";
 import { useDispatch, useSelector } from "react-redux";
 import { setSortBy } from "../store/actions/sortBy";
 import { setGenre } from "../store/actions/genre";
-genreOptions.unshift({ value: "all", label: "All" });
-const genres = genreOptions;
+
+const genres = [...genreOptions];
+genres.unshift({ value: "all", label: "All" })
 
 const FilterPanel = () => {
   const dispatch = useDispatch();
