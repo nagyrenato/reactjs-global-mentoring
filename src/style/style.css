@@ -60,6 +60,13 @@ html {
   overflow: hidden;
 }
 
+.notfound-box {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
 .search-box-foreground,
 .movie-detail-box-foreground {
   position: absolute;
@@ -101,10 +108,27 @@ html {
   background-size: cover;
 }
 
+.notfound-box-background {
+  width: 100%;
+  height: 600px;
+
+  background: url("./img/404.jpg");
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .search-box .logo,
 .movie-detail-box .logo,
 .footer .logo {
   color: #f65261;
+}
+
+.notfound-box .logo {
+  color: #f65261;
+  margin-top: 20px;
 }
 
 .search-box .title,
@@ -153,6 +177,15 @@ html {
   color: #00ff00;
   font-weight: lighter;
   border-style: solid;
+}
+
+.notfound-box .btn-go-back-to-main,
+.notfound-box .btn-go-back-to-main:active:focus {
+  background-color: rgba(128, 128, 128, 0);
+  color: #f65261;
+  border: solid;
+  border-color: #f65261;
+  text-transform: uppercase;
 }
 
 .dropdown .btn,
