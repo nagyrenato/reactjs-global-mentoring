@@ -8,7 +8,16 @@ import * as yup from "yup";
 import FormikContainer from "./form/FormikContainer";
 import FormikFormElement from "./form/FormikFormElement";
 
-const MovieEditForm = ({ movie = {}, show, handleClose }) => {
+const emptyMovie = {
+  title: "", 
+  release_date: "", 
+  poster_path: "", 
+  genres: [], 
+  overview: "", 
+  runtime: ""
+}
+
+const MovieEditForm = ({ movie = emptyMovie, show, handleClose }) => {
   let modalTitle = movie.id ? "Edit movie" : "Add movie";
   let submitText = movie.id ? "Save" : "Submit";
 
@@ -35,7 +44,7 @@ const MovieEditForm = ({ movie = {}, show, handleClose }) => {
   };
 
   const initialGenresAsOption = genres.filter((genreOption) => {
-    return (movie.genres || []).filter(
+    return movie.genres.filter(
       (movieGenre) => movieGenre === genreOption.value
     ).length > 0
       ? genreOption
