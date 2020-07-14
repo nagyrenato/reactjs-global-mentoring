@@ -18,7 +18,9 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/movies/:movieId" component={MovieDetailPage} />
+          {/* The original task was to implement it with routing to "/film/id" but this way the routing fits more to REST standard */}
+          <Route path="/movies/:movieId" component={MovieDetailPage} />
+          <Route path="/search/:searchTerm" component={HomePage} />
           <Route path="/not-found" component={NotFoundPage} />
           <Redirect to="/not-found" />
         </Switch>

@@ -225,7 +225,13 @@ html {
 }
 
 .search-box .btn-add-movie,
-.search-box .btn-add-movie:active:focus,
+.search-box .btn-add-movie:active:focus {
+  background-color: rgba(128, 128, 128, 0.4);
+  color: #f65261;
+  border: none;
+  text-transform: uppercase;
+}
+
 .btn-sort-by .btn,
 .btn-sort-by .btn:active:focus,
 .btn-sort-by .btn.active:focus,
