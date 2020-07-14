@@ -60,7 +60,7 @@ html {
   overflow: hidden;
 }
 
-.notfound-box {
+.not-found-box {
   width: 100%;
   height: 600px;
   position: relative;
@@ -108,7 +108,7 @@ html {
   background-size: cover;
 }
 
-.notfound-box-background {
+.not-found-box-background {
   width: 100%;
   height: 600px;
 
@@ -122,13 +122,9 @@ html {
 
 .search-box .logo,
 .movie-detail-box .logo,
+.not-found-box .logo,
 .footer .logo {
   color: #f65261;
-}
-
-.notfound-box .logo {
-  color: #f65261;
-  margin-top: 20px;
 }
 
 .search-box .title,
@@ -179,8 +175,8 @@ html {
   border-style: solid;
 }
 
-.notfound-box .btn-go-back-to-main,
-.notfound-box .btn-go-back-to-main:active:focus {
+.not-found-box .btn-go-back-to-main,
+.not-found-box .btn-go-back-to-main:active:focus {
   background-color: rgba(128, 128, 128, 0);
   color: #f65261;
   border: solid;
@@ -566,4 +562,13 @@ html {
 
 .movie-item .movie-genres {
   font-size: smaller;
+}
+
+.not-found .not-found-page-not-found {
+  text-transform: capitalize;
+  margin-top: 100px;
+}
+
+.not-found .not-found-go-back-to-home {
+  margin-top: 125px;
 }

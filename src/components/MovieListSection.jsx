@@ -29,7 +29,6 @@ const MovieListSection = () => {
     }
   }
 
-  console.log(sortBy);
   queryParams.push(sortByMap[sortBy]);
 
   if (searchTerm) {

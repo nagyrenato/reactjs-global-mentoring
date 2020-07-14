@@ -21,7 +21,9 @@ function SearchBar() {
   }
 
   function handleClick() {
-    history.push(`/search/${searchTerm}`);
+    if (searchTerm !== null && searchTerm !== "") {
+      history.push(`/search/${searchTerm}`);
+    }
   }
 
   return (

@@ -7,16 +7,22 @@ import { Link } from "react-router-dom";
 function NotFound() {
   return (
     <>
-      <div className={"notfound-box-background"}>
-        <div className={"notfound-box mb-3"}>
-          <h5 className={"logo ml-4"}>
-            <strong>netflix</strong>roulette
-          </h5>
-          <Container className={"text-capitalize empty-movie-list"}>
-            <Row className={"d-flex align-items-center justify-content-center"}>
-              <p>page not found</p>
+      <div className={"not-found not-found-box-background"}>
+        <div className={"not-found-box mb-3"}>
+          <Container className={"empty-movie-list"}>
+            <Row className={"m-4 mb-5 align-items-center"}>
+              <h5 className={"logo ml-4"}>
+                <strong>netflix</strong>roulette
+              </h5>
             </Row>
             <Row className={"d-flex align-items-center justify-content-center"}>
+              <p className="not-found-page-not-found">page not found</p>
+            </Row>
+            <Row
+              className={
+                "not-found-go-back-to-home d-flex align-items-center justify-content-center"
+              }
+            >
               <Link to={"/"}>
                 <Button className={"btn-go-back-to-main shadow-none"}>
                   go back to home
