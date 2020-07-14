@@ -19,7 +19,6 @@ const FormikContainer = ({
           {[...children].filter(Boolean).map((child, index) => {
             return React.cloneElement(child, {
               key: index,
-              value: formik.values[child.props.name] || "",
               invalid: formik.touched[child.props.name] && !!formik.errors[child.props.name]
             });
           })}
