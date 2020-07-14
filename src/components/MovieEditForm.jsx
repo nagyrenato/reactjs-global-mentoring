@@ -1,161 +1,124 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import Select from "react-select";
 import genres from "../utils/Genres";
-import useForm from "../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { upsertMovie } from "../store/actions/movies";
+import * as yup from "yup";
+import FormikContainer from "./form/FormikContainer";
+import FormikFormElement from "./form/FormikFormElement";
 
-const MovieEditForm = ({ movie = {}, show, handleClose }) => {
-  const [formValues, handleChange, resetForm] = useForm({
-    title: movie.title,
-    releaseDate: movie.release_date,
-    url: movie.poster_path,
-    genres: findGenresOptions(movie.genres),
-    overview: movie.overview,
-    runtime: movie.runtime,
-  });
+const emptyMovie = {
+  title: "", 
+  release_date: "", 
+  poster_path: "", 
+  genres: [], 
+  overview: "", 
+  runtime: ""
+}
 
+const MovieEditForm = ({ movie = emptyMovie, show, handleClose }) => {
   let modalTitle = movie.id ? "Edit movie" : "Add movie";
   let submitText = movie.id ? "Save" : "Submit";
 
-  function findGenresOptions(inputGenres = []) {
-    return genres.filter((genre) => {
-      return inputGenres.filter((input) => input === genre.value).length > 0
-        ? genre
-        : null;
-    });
-  }
+  const validationSchema = yup.object({
+    title: yup.string().required("Title is required").max(100),
+    release_date: yup.date().typeError("Must be a valid date"),
+    poster_path: yup.string().url("Must be a valid URL").required("Movie URL is required"),
+    genres: yup.array().min(1, "Genres is required").required("Genres is required"),
+    overview: yup.string().max(1000, "Must be less than 1000 characters").required("Overview is required"),
+    runtime: yup.number().min(10).max(300).required("Runtime is required").typeError("Must be a number")
+  });
 
   const dispatch = useDispatch();
-
-  const getMovieFromUserInput = () => {
-    return {
-      ...movie,
-      id: movie.id,
-      title: formValues.title,
-      release_date: formValues.releaseDate,
-      poster_path: formValues.url,
-      genres: formValues.genres.map((option) => option.label),
-      overview: formValues.overview,
-      runtime: parseInt(formValues.runtime),
+  const onSubmit = (data) => {
+    const selectedGenres = data.genres.map((option) => option.value);
+    const movieFromUserInput = {
+      ...data,
+      genres: selectedGenres,
+      runtime: parseInt(data.runtime),
+      tagline: data.tagline || "-",
     };
+    dispatch(upsertMovie(movieFromUserInput));
+    handleClose();
   };
+
+  const initialGenresAsOption = genres.filter((genreOption) => {
+    return movie.genres.filter(
+      (movieGenre) => movieGenre === genreOption.value
+    ).length > 0
+      ? genreOption
+      : null;
+  });
 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton />
 
-      <div className={"mx-5 mb-4 h2 modal-title"}>{modalTitle}</div>
-      <Form className={"mx-5"}>
-        {movie.id && (
-          <Form.Group>
-            <Form.Label>Movie ID</Form.Label>
-            <Form.Text className={"movie-id"}>{movie.id}</Form.Text>
-          </Form.Group>
-        )}
-        <Form.Group>
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Title here"
-            name="title"
-            value={formValues.title}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Release date</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Select date"
-            name="releaseDate"
-            value={formValues.releaseDate}
-            onChange={handleChange}
-          />
-          {/* TODO add a datepicker or something like that */}
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Movie URL</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Movie URL here"
-            name="url"
-            value={formValues.url}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Genre</Form.Label>
-          <Select
-            isMulti={true}
-            options={genres}
-            classNamePrefix={"select-genre"}
-            name="genres"
-            onChange={(selectedValues) =>
-              handleChange({
-                target: { value: selectedValues, name: "genres" },
-              })
-            }
-            value={formValues.genres}
-            theme={(theme) => ({
-              ...theme,
-              borderRadius: 6,
-              colors: {
-                ...theme.colors,
-                primary25: "#555555",
-                primary: "#000000",
-                neutral0: "#323232",
-                neutral70: "#555555",
-                danger: "#555555",
-                dangerLight: "#cccccc",
-              },
-            })}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Overview</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Overview here"
-            name="overview"
-            value={formValues.overview}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Runtime</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Runtime here"
-            name="runtime"
-            value={formValues.runtime}
-            onChange={handleChange}
-          />
-        </Form.Group>
-      </Form>
+      <div className="mx-5 mb-4 h2 modal-title">{modalTitle}</div>
 
-      <Modal.Footer className={"mb-5"}>
-        <Button
-          className={"outline shadow-none"}
-          variant={"secondary"}
-          onClick={resetForm}
-        >
-          Reset
-        </Button>
-        <Button
-          className={"shadow-none"}
-          variant={"secondary"}
-          onClick={() => {
-            dispatch(upsertMovie(getMovieFromUserInput()));
-            handleClose();
-          }}
-        >
-          {submitText}
-        </Button>
-      </Modal.Footer>
+      <FormikContainer
+        initialValues={{ ...movie, genres: initialGenresAsOption }}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+        className="mx-5"
+      >
+        {movie.id && (
+          <FormikFormElement
+            type="plain"
+            name="id"
+            label="Movie id"
+            text={movie.id}
+            className="movie-id"
+          />
+        )}
+        <FormikFormElement
+          type="text"
+          name="title"
+          label="Title"
+          placeholder="Title here"
+        />
+        <FormikFormElement
+          type="text"
+          name="release_date"
+          label="Release date"
+          placeholder="Release date here"
+        />
+        <FormikFormElement
+          type="text"
+          name="poster_path"
+          label="Movie URL"
+          placeholder="Movie URL here"
+        />
+        <FormikFormElement
+          type="select"
+          name="genres"
+          label="Genres"
+          multi={true}
+          options={genres}
+        />
+        <FormikFormElement
+          type="textarea"
+          name="overview"
+          label="Overview"
+          placeholder="Overview here"
+        />
+        <FormikFormElement
+          type="text"
+          name="runtime"
+          label="Runtime"
+          placeholder="Runtime here"
+        />
+
+        <Modal.Footer className="mb-5">
+          <Button className="outline shadow-none" variant="secondary">
+            Reset
+          </Button>
+          <Button className="shadow-none" variant="secondary" type="submit">
+            {submitText}
+          </Button>
+        </Modal.Footer>
+      </FormikContainer>
     </Modal>
   );
 };
