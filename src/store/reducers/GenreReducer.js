@@ -1,6 +1,6 @@
 export const SET_GENRE = "SET_GENRE";
 
-const genreReducer = (state = null, action) => {
+const genreReducer = (state, action) => {
   switch (action.type) {
     case SET_GENRE: {
       state = action.payload;
