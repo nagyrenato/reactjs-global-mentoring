@@ -9,8 +9,6 @@ import Moment from "react-moment";
 import { Link } from "react-router-dom";
 
 function MovieListItem({ movie, onEdit, onDelete, setMovie }) {
-  function handleImageOnClick() {}
-
   return (
     <Container className={"px-0 mb-5 movie-item"}>
       <Row className={"mb-3"}>
@@ -35,7 +33,6 @@ function MovieListItem({ movie, onEdit, onDelete, setMovie }) {
           </DropdownButton>
           <Link to={"/movies/" + movie.id}>
             <Image
-              onClick={handleImageOnClick}
               fluid
               src={movie.poster_path}
               onError={(e) => {

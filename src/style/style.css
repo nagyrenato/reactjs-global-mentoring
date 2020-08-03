@@ -60,6 +60,13 @@ html {
   overflow: hidden;
 }
 
+.not-found-box {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
 .search-box-foreground,
 .movie-detail-box-foreground {
   position: absolute;
@@ -101,8 +108,21 @@ html {
   background-size: cover;
 }
 
+.not-found-box-background {
+  width: 100%;
+  height: 600px;
+
+  background: url("./img/404.jpg");
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .search-box .logo,
 .movie-detail-box .logo,
+.not-found-box .logo,
 .footer .logo {
   color: #f65261;
 }
@@ -155,6 +175,15 @@ html {
   border-style: solid;
 }
 
+.not-found-box .btn-go-back-to-main,
+.not-found-box .btn-go-back-to-main:active:focus {
+  background-color: rgba(128, 128, 128, 0);
+  color: #f65261;
+  border: solid;
+  border-color: #f65261;
+  text-transform: uppercase;
+}
+
 .dropdown .btn,
 .dropdown .btn:active {
   box-shadow: none !important;
@@ -192,7 +221,13 @@ html {
 }
 
 .search-box .btn-add-movie,
-.search-box .btn-add-movie:active:focus,
+.search-box .btn-add-movie:active:focus {
+  background-color: rgba(128, 128, 128, 0.4);
+  color: #f65261;
+  border: none;
+  text-transform: uppercase;
+}
+
 .btn-sort-by .btn,
 .btn-sort-by .btn:active:focus,
 .btn-sort-by .btn.active:focus,
@@ -534,4 +569,13 @@ html {
 
 .movie-item .movie-genres {
   font-size: smaller;
+}
+
+.not-found .not-found-page-not-found {
+  text-transform: capitalize;
+  margin-top: 100px;
+}
+
+.not-found .not-found-go-back-to-home {
+  margin-top: 125px;
 }
